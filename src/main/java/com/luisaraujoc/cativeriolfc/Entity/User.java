@@ -1,5 +1,7 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
+import com.luisaraujoc.cativeriolfc.Enum.Role;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,16 +27,18 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private Role role;
 
     @OneToOne
     @JoinColumn(name = "id_person")
     private Person person;
 
-    public User(Integer id, String name, String email, String password, Person person) {
+    public User(Integer id, String name, String email, String password, Role role, Person person) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = role;
         this.person = person;
     }
 }
