@@ -24,14 +24,14 @@ public class Person {
 
     private String fullName;
 
-//    private Date birthDate;
+    private Date birthDate;
 
     private String surname;
 
-    public Person(Integer id, String fullName, String surname) {
+    public Person(Integer id, String fullName, Date birthDate, String surname) {
         this.id = id;
         this.fullName = fullName;
-//        this.birthDate = birthDate;
+        this.birthDate = birthDate;
         this.surname = surname;
     }
 }
