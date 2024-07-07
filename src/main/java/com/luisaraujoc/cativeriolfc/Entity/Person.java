@@ -1,37 +1,62 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-import java.util.Date;
-
-@Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
 public class Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	private long id;
 
-    private String fullName;
+	private char nome;
 
-    private Date birthDate;
+	private char CPF;
 
-    private String surname;
+	private char Contato;
 
-    public Person(Integer id, String fullName, Date birthDate, String surname) {
-        this.id = id;
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.surname = surname;
-    }
+	private char tipo;
+
+	public Person(long id, char nome, char cPF, char contato, char tipo) {
+		this.id = id;
+		this.nome = nome;
+		CPF = cPF;
+		Contato = contato;
+		this.tipo = tipo;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public char getNome() {
+		return nome;
+	}
+
+	public void setNome(char nome) {
+		this.nome = nome;
+	}
+
+	public char getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(char cPF) {
+		CPF = cPF;
+	}
+
+	public char getContato() {
+		return Contato;
+	}
+
+	public void setContato(char contato) {
+		Contato = contato;
+	}
+
+	public char getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(char tipo) {
+		this.tipo = tipo;
+	}
 }

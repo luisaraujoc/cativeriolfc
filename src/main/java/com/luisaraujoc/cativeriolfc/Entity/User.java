@@ -1,44 +1,62 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
-import com.luisaraujoc.cativeriolfc.Enum.Role;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	private long id;
 
-    private String name;
-    private String email;
-    private String password;
-    private Role role;
+	private char username;
 
-    @OneToOne
-    @JoinColumn(name = "id_person")
-    private Person person;
+	private char passowrd;
 
-    public User(Integer id, String name, String email, String password, Role role, Person person) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.person = person;
-    }
+	private boolean status;
+
+	private Person person;
+
+	public User(long id, char username, char passowrd, boolean status, Person person) {
+		this.id = id;
+		this.username = username;
+		this.passowrd = passowrd;
+		this.status = status;
+		this.person = person;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public char getUsername() {
+		return username;
+	}
+
+	public void setUsername(char username) {
+		this.username = username;
+	}
+
+	public char getPassowrd() {
+		return passowrd;
+	}
+
+	public void setPassowrd(char passowrd) {
+		this.passowrd = passowrd;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 }
