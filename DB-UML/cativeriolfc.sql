@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `cativeriolfc2`
 --
-CREATE DATABASE IF NOT EXISTS `cativeriolfc2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `cativeriolfc2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE `cativeriolfc2`;
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `id` bigint NOT NULL,
   `gameDay` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `game`
@@ -54,11 +54,11 @@ INSERT INTO `game` (`id`, `gameDay`) VALUES
 DROP TABLE IF EXISTS `guest`;
 CREATE TABLE IF NOT EXISTS `guest` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `host_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Guest_Host` (`host_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `guest`
@@ -78,21 +78,21 @@ INSERT INTO `guest` (`id`, `name`, `host_id`) VALUES
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `cpf` char(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `tel` char(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `kindPerson` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `cpf` char(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `tel` char(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `kindPerson` ENUM('ADMIN', 'USER') CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `person`
 --
 
 INSERT INTO `person` (`id`, `name`, `cpf`, `tel`, `kindPerson`) VALUES
-(1, 'John Doe', '12345678901', '555-1234', 'player'),
-(2, 'Jane Smith', '23456789012', '555-5678', 'coach'),
-(3, 'Alice Johnson', '34567890123', '555-8765', 'player');
+(1, 'John Doe', '12345678901', '555-1234', 'USER'),
+(2, 'Jane Smith', '23456789012', '555-5678', 'ADMIN'),
+(3, 'Alice Johnson', '34567890123', '555-8765', 'USER');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `scout` (
   KEY `fk_Scout_Team1_idx` (`Team_id`),
   KEY `fk_Scout_Game1_idx` (`Game_id`),
   KEY `fk_Scout_Person1_idx` (`Person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `scout`
@@ -131,9 +131,9 @@ INSERT INTO `scout` (`id`, `Team_id`, `Game_id`, `Person_id`, `gol`) VALUES
 DROP TABLE IF EXISTS `team`;
 CREATE TABLE IF NOT EXISTS `team` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `team`
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `team_person` (
   PRIMARY KEY (`id`),
   KEY `fk_time_id` (`time_id`),
   KEY `fk_person_id` (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `team_person`
@@ -177,14 +177,14 @@ INSERT INTO `team_person` (`id`, `time_id`, `person_id`) VALUES
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` char(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `userName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `password` char(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `person_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `userName` (`userName`),
   UNIQUE KEY `person_id` (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Despejando dados para a tabela `user`
