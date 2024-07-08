@@ -6,16 +6,16 @@ public class User {
 
 	private char username;
 
-	private char passowrd;
+	private char passoword;
 
 	private boolean status;
 
 	private Person person;
 
-	public User(long id, char username, char passowrd, boolean status, Person person) {
+	public User(long id, char username, char passoword, boolean status, Person person) {
 		this.id = id;
 		this.username = username;
-		this.passowrd = passowrd;
+		this.passoword = passoword;
 		this.status = status;
 		this.person = person;
 	}
@@ -36,12 +36,12 @@ public class User {
 		this.username = username;
 	}
 
-	public char getPassowrd() {
-		return passowrd;
+	public char getPassoword() {
+		return passoword;
 	}
 
-	public void setPassowrd(char passowrd) {
-		this.passowrd = passowrd;
+	public void setPassoword(char passowrd) {
+		this.passoword = passowrd;
 	}
 
 	public boolean isStatus() {
