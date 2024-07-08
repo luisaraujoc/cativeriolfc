@@ -1,11 +1,9 @@
 package com.luisaraujoc.cativeriolfc.Enum;
 
 public enum Role {
-    // 1 - ADMIN, 2 - USER, 3 - CONVIDADO, 4 - SCOUTER
+    // 1 - ADMIN, 2 - USER
     ADMIN(1),
-    USER(2),
-    CONVIDADO(3),
-    SCOUTER(4);
+    USER(2);
 
     private final int value;
 

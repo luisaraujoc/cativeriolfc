@@ -1,21 +1,23 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
+import com.luisaraujoc.cativeriolfc.Util.Cryptography;
+
 public class User {
 
 	private long id;
 
-	private char username;
+	private String username;
 
-	private char passoword;
+	private String password;
 
 	private boolean status;
 
 	private Person person;
 
-	public User(long id, char username, char passoword, boolean status, Person person) {
+	public User(long id, String username, String password, boolean status, Person person) {
 		this.id = id;
 		this.username = username;
-		this.passoword = passoword;
+		this.password = password;
 		this.status = status;
 		this.person = person;
 	}
@@ -28,20 +30,20 @@ public class User {
 		this.id = id;
 	}
 
-	public char getUsername() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(char username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public char getPassoword() {
-		return passoword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPassoword(char passowrd) {
-		this.passoword = passowrd;
+	public void setPassword(String password) {
+		this.password = Cryptography.encrypt(password);
 	}
 
 	public boolean isStatus() {

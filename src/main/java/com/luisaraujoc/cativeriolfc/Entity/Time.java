@@ -2,20 +2,20 @@ package com.luisaraujoc.cativeriolfc.Entity;
 
 public class Time {
 
-	private char nome;
+	private String nome;
 
 	private Person jogador;
 
-	public Time(char nome, Person jogador) {
+	public Time(String nome, Person jogador) {
 		this.nome = nome;
 		this.jogador = jogador;
 	}
 
-	public char getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(char nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 

@@ -4,18 +4,14 @@ public class Baba {
 
 	private long id;
 	private Time time;
-	private char data;
+	private String data;
 	private Scout scouts;
-	private Person jogadoresConfirmados;
-	private Person jogadoresPresentes;
 	
-	public Baba(long id, Time time, char data, Scout scouts, Person jogadoresConfirmados, Person jogadoresPresentes) {
+	public Baba(long id, Time time, String data, Scout scouts) {
 		this.id = id;
 		this.time = time;
 		this.data = data;
 		this.scouts = scouts;
-		this.jogadoresConfirmados = jogadoresConfirmados;
-		this.jogadoresPresentes = jogadoresPresentes;
 	}
 	
 	// Getters and Setters
@@ -36,11 +32,11 @@ public class Baba {
 		this.time = time;
 	}
 
-	public char getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(char data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
@@ -52,19 +48,4 @@ public class Baba {
 		this.scouts = scouts;
 	}
 
-	public Person getJogadoresConfirmados() {
-		return jogadoresConfirmados;
-	}
-
-	public void setJogadoresConfirmados(Person jogadoresConfirmados) {
-		this.jogadoresConfirmados = jogadoresConfirmados;
-	}
-
-	public Person getJogadoresPresentes() {
-		return jogadoresPresentes;
-	}
-
-	public void setJogadoresPresentes(Person jogadoresPresentes) {
-		this.jogadoresPresentes = jogadoresPresentes;
-	}
 }

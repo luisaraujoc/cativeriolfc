@@ -1,23 +1,25 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
+import com.luisaraujoc.cativeriolfc.Enum.Role;
+
 public class Person {
 
 	private long id;
 
-	private char nome;
+	private String nome;
 
-	private char CPF;
+	private String CPF;
 
-	private char Contato;
+	private String Contato;
 
-	private char tipo;
+	private Role kindUser;
 
-	public Person(long id, char nome, char cPF, char contato, char tipo) {
+	public Person(long id, String nome, String cPF, String contato, Role kindUser) {
 		this.id = id;
 		this.nome = nome;
 		CPF = cPF;
 		Contato = contato;
-		this.tipo = tipo;
+		this.kindUser = kindUser;
 	}
 
 	public long getId() {
@@ -28,35 +30,35 @@ public class Person {
 		this.id = id;
 	}
 
-	public char getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(char nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public char getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(char cPF) {
+	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
 
-	public char getContato() {
+	public String getContato() {
 		return Contato;
 	}
 
-	public void setContato(char contato) {
+	public void setContato(String contato) {
 		Contato = contato;
 	}
 
-	public char getTipo() {
-		return tipo;
+	public Role getKindUser() {
+		return kindUser;
 	}
 
-	public void setTipo(char tipo) {
-		this.tipo = tipo;
+	public void setKindUser(Role kindUser) {
+		this.kindUser = kindUser;
 	}
 }
