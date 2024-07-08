@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `cativeriolfc2`
+-- Banco de dados: `cativeriolfc`
 --
-CREATE DATABASE IF NOT EXISTS `cativeriolfc2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-USE `cativeriolfc2`;
+CREATE DATABASE IF NOT EXISTS `cativeriolfc` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+USE `cativeriolfc`;
 
 -- --------------------------------------------------------
 
