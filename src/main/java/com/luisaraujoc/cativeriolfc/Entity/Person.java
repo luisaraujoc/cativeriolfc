@@ -4,61 +4,63 @@ import com.luisaraujoc.cativeriolfc.Enum.Role;
 
 public class Person {
 
-	private long id;
+	private Long id;
 
-	private String nome;
+	private String name;
 
-	private String CPF;
+	private char nome;
 
-	private String Contato;
+	private char CPF;
 
-	private Role kindUser;
+	private char Contato;
 
-	public Person(long id, String nome, String cPF, String contato, Role kindUser) {
+	private char tipo;
+
+	public Person(long id, char nome, char cPF, char contato, char tipo) {
 		this.id = id;
 		this.nome = nome;
 		CPF = cPF;
 		Contato = contato;
-		this.kindUser = kindUser;
+		this.tipo = tipo;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getNome() {
+	public char getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(char nome) {
 		this.nome = nome;
 	}
 
-	public String getCPF() {
+	public char getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(String cPF) {
+	public void setCPF(char cPF) {
 		CPF = cPF;
 	}
 
-	public String getContato() {
+	public char getContato() {
 		return Contato;
 	}
 
-	public void setContato(String contato) {
+	public void setContato(char contato) {
 		Contato = contato;
 	}
 
-	public Role getKindUser() {
-		return kindUser;
+	public char getTipo() {
+		return tipo;
 	}
 
-	public void setKindUser(Role kindUser) {
-		this.kindUser = kindUser;
+	public void setTipo(char tipo) {
+		this.tipo = tipo;
 	}
 }

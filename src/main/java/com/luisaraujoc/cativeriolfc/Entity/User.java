@@ -4,61 +4,61 @@ import com.luisaraujoc.cativeriolfc.Util.Cryptography;
 
 public class User {
 
-	private long id;
+    private long id;
 
-	private String username;
+	private char username;
 
-	private String password;
+	private char passoword;
 
-	private boolean status;
+    private boolean status;
 
-	private Person person;
+    private Person person;
 
-	public User(long id, String username, String password, boolean status, Person person) {
+	public User(long id, char username, char passoword, boolean status, Person person) {
 		this.id = id;
 		this.username = username;
-		this.password = password;
+		this.passoword = passoword;
 		this.status = status;
 		this.person = person;
 	}
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getUsername() {
+	public char getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(char username) {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public char getPassoword() {
+		return passoword;
 	}
 
-	public void setPassword(String password) {
-		this.password = Cryptography.encrypt(password);
+	public void setPassoword(char passowrd) {
+		this.passoword = passowrd;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
+    public boolean isStatus() {
+        return status;
+    }
 
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
-	public Person getPerson() {
-		return person;
-	}
+    public Person getPerson() {
+        return person;
+    }
 
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 }
