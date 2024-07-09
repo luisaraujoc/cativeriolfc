@@ -2,61 +2,64 @@ package com.luisaraujoc.cativeriolfc.Entity;
 
 public class Person {
 
-	private long id;
+	private Long id;
 
-	private char nome;
+	private String name;
 
-	private char CPF;
+	private String cpf;
 
-	private char Contato;
+	private String tel;
 
-	private char tipo;
+	private String kindUser;
 
-	public Person(long id, char nome, char cPF, char contato, char tipo) {
-		this.id = id;
-		this.nome = nome;
-		CPF = cPF;
-		Contato = contato;
-		this.tipo = tipo;
+	public Person() {
 	}
 
-	public long getId() {
+	public Person(Long id, String name, String cpf, String tel, String kindUser) {
+		this.id = id;
+		this.name = name;
+		this.cpf = cpf;
+		this.tel = tel;
+		this.kindUser = kindUser;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public char getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(char nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public char getCPF() {
-		return CPF;
+	public String getTel() {
+		return tel;
 	}
 
-	public void setCPF(char cPF) {
-		CPF = cPF;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
-	public char getContato() {
-		return Contato;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setContato(char contato) {
-		Contato = contato;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
-	public char getTipo() {
-		return tipo;
+	public String getKindUser() {
+		return kindUser;
 	}
 
-	public void setTipo(char tipo) {
-		this.tipo = tipo;
+	public void setKindUser(String kindUser) {
+		this.kindUser = kindUser;
 	}
 }
