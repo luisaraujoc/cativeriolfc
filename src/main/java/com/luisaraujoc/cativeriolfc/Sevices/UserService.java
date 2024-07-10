@@ -1,8 +1,8 @@
-package com.luisaraujoc.cativeriolfc.sevices;
+package com.luisaraujoc.cativeriolfc.Sevices;
 
 import com.luisaraujoc.cativeriolfc.Entity.User;
-import com.luisaraujoc.cativeriolfc.dao.DaoFactory;
-import com.luisaraujoc.cativeriolfc.dao.implement.UserDao;
+import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
+import com.luisaraujoc.cativeriolfc.Dao.UserDao;
 
 import java.util.List;
 

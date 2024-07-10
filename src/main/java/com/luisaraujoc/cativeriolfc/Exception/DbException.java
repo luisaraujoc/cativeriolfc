@@ -1,4 +1,4 @@
-package com.luisaraujoc.cativeriolfc.db;
+package com.luisaraujoc.cativeriolfc.Exception;
 
 import java.io.Serial;
 

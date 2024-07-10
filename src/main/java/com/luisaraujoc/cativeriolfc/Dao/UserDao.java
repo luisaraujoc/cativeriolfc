@@ -1,11 +1,11 @@
-package com.luisaraujoc.cativeriolfc.dao.implement;
+package com.luisaraujoc.cativeriolfc.Dao;
 
 
 import com.luisaraujoc.cativeriolfc.Entity.User;
 import com.luisaraujoc.cativeriolfc.Util.Cryptography;
-import com.luisaraujoc.cativeriolfc.dao.interfac.UserDaoInter;
-import com.luisaraujoc.cativeriolfc.db.DB;
-import com.luisaraujoc.cativeriolfc.db.DbException;
+import com.luisaraujoc.cativeriolfc.Interface.UserDaoInter;
+import com.luisaraujoc.cativeriolfc.Config.DB;
+import com.luisaraujoc.cativeriolfc.Exception.DbException;
 
 import java.sql.*;
 import java.util.ArrayList;

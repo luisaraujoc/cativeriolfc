@@ -1,4 +1,6 @@
-package com.luisaraujoc.cativeriolfc.db;
+package com.luisaraujoc.cativeriolfc.Config;
+
+import com.luisaraujoc.cativeriolfc.Exception.DbException;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
-import com.luisaraujoc.cativeriolfc.dao.DaoFactory;
+import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,9 +19,7 @@ public class User implements Serializable {
 
     private Person person;
 
-    public User() {
-
-    }
+    public User() {}
 
     public User(Long id, String username, String password, Boolean status, Long person_id) {
         this.id = id;

@@ -1,4 +1,4 @@
-package com.luisaraujoc.cativeriolfc.dao.interfac;
+package com.luisaraujoc.cativeriolfc.Interface;
 
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 

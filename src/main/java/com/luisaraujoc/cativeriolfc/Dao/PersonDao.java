@@ -1,9 +1,9 @@
-package com.luisaraujoc.cativeriolfc.dao.implement;
+package com.luisaraujoc.cativeriolfc.Dao;
 
 import com.luisaraujoc.cativeriolfc.Entity.Person;
-import com.luisaraujoc.cativeriolfc.dao.interfac.PersonDaoInter;
-import com.luisaraujoc.cativeriolfc.db.DB;
-import com.luisaraujoc.cativeriolfc.db.DbException;
+import com.luisaraujoc.cativeriolfc.Interface.PersonDaoInter;
+import com.luisaraujoc.cativeriolfc.Config.DB;
+import com.luisaraujoc.cativeriolfc.Exception.DbException;
 
 import java.sql.*;
 import java.util.ArrayList;

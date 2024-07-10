@@ -1,9 +1,9 @@
-package com.luisaraujoc.cativeriolfc.controllers;
+package com.luisaraujoc.cativeriolfc.Controllers;
 
 
 import com.luisaraujoc.cativeriolfc.DTO.UserRequest;
 import com.luisaraujoc.cativeriolfc.Entity.User;
-import com.luisaraujoc.cativeriolfc.sevices.UserService;
+import com.luisaraujoc.cativeriolfc.Sevices.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
