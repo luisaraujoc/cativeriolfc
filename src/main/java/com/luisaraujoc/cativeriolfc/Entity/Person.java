@@ -5,100 +5,92 @@ import java.util.Objects;
 
 import com.luisaraujoc.cativeriolfc.Enum.Role;
 
-
-
 public class Person implements Serializable {
 
+    private Long id;
+    private String name;
+    private String cpf;
+    private String tel;
+    private Role kindUser;
 
-	private Long id;
+    public Person() {}
 
-	private String name;
+    public Person(String name, String cpf, String tel, Role kindUser) {
+        this.name = name;
+        this.cpf = cpf;
+        this.tel = tel;
+        this.kindUser = kindUser;
+    }
 
-	private String cpf;
+    public Person(Long id, String name, String cpf, String tel, Role kindUser) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.tel = tel;
+        this.kindUser = kindUser;
+    }
 
-	private String tel;
+    public Long getId() {
+        return id;
+    }
 
-	private String kindUser;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Person(){}
+    public String getName() {
+        return name;
+    }
 
-	public Person(String name, String cpf, String tel, String kindUser) {
-		this.name = name;
-		this.cpf = cpf;
-		this.tel = tel;
-		this.kindUser = kindUser;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Person(Long id, String name, String cpf, String tel, String kindUser) {
-		this.id = id;
-		this.name = name;
-		this.cpf = cpf;
-		this.tel = tel;
-		this.kindUser = kindUser;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public String getTel() {
+        return tel;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Role getKindUser() {
+        return kindUser;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setKindUser(Role kindUser) {
+        this.kindUser = kindUser;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(id, person.id);
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
-	public String getTel() {
-		return tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
-	public String getKindUser() {
-		return kindUser;
-	}
-
-	public void setKindUser(String kindUser) {
-		this.kindUser = kindUser;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Person person = (Person) o;
-		return Objects.equals(id, person.id);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(id);
-	}
-
-	@Override
-	public String toString() {
-		return "Person{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", cpf='" + cpf + '\'' +
-				", tel='" + tel + '\'' +
-				", kindUser='" + kindUser + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", tel='" + tel + '\'' +
+                ", kindUser='" + kindUser + '\'' +
+                '}';
+    }
 }
