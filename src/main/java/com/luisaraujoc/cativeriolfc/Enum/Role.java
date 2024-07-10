@@ -15,12 +15,12 @@ public enum Role {
         return value;
     }
 
-    // public static Role fromValue(int value) {
-    //     for (Role role : Role.values()) {
-    //         if (role.getValue() == value) {
-    //             return role;
-    //         }
-    //     }
-    //     throw new IllegalArgumentException("Valor desconhecido: " + value);
-    // }
+    public static Role fromValue(String value) {
+        for (Role role : Role.values()) {
+            if (role.getValue().equals(value)) {
+                return role;
+            }
+        }
+        throw new IllegalArgumentException("Valor desconhecido: " + value);
+    }
 }
