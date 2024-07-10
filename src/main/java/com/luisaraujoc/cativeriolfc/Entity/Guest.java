@@ -1,16 +1,16 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
-public class Convidado {
+public class Guest {
 
     private Long id;
     private String name;
     private Person host;
 
     // Constructors
-    public Convidado() {
+    public Guest() {
     }
 
-    public Convidado(String name, Person host) {
+    public Guest(String name, Person host) {
         this.name = name;
         this.host = host;
     }

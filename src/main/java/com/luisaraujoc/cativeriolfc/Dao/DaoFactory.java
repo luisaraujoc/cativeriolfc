@@ -1,6 +1,5 @@
 package com.luisaraujoc.cativeriolfc.Dao;
 
-
 import com.luisaraujoc.cativeriolfc.Config.DB;
 
 public class DaoFactory {
@@ -11,5 +10,9 @@ public class DaoFactory {
 
     public static UserDao createUserDao(){
         return new UserDao(DB.getConnection());
+    }
+
+    public static GuestDao createGuestDao(){
+        return new GuestDao(DB.getConnection());
     }
 }
