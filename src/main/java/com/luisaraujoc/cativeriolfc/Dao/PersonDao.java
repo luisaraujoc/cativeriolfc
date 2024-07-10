@@ -1,37 +1,35 @@
-package com.luisaraujoc.cativeriolfc.dao.implement;
-
+package com.luisaraujoc.cativeriolfc.Dao;
 
 import com.luisaraujoc.cativeriolfc.Entity.Person;
-import com.luisaraujoc.cativeriolfc.Entity.User;
-import com.luisaraujoc.cativeriolfc.dao.DaoFactory;
-import com.luisaraujoc.cativeriolfc.dao.interfac.UserDaoInter;
-import com.luisaraujoc.cativeriolfc.db.DB;
-import com.luisaraujoc.cativeriolfc.db.DbException;
+import com.luisaraujoc.cativeriolfc.Interface.PersonDaoInter;
+import com.luisaraujoc.cativeriolfc.Config.DB;
+import com.luisaraujoc.cativeriolfc.Exception.DbException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao implements UserDaoInter {
+public class PersonDao  implements PersonDaoInter {
+
     private Connection conn = null;
-    public UserDao(Connection conn){
+    public PersonDao(Connection conn){
         this.conn = conn;
     }
 
     @Override
-    public User insert(User obj) {
+    public Person insert(Person obj) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
         try {
 
-            st = conn.prepareStatement("INSERT INTO person (userName, password, status, person_id) VALUES (?, ?, ?, ?)",
+            st = conn.prepareStatement("INSERT INTO person (name, cpf, tel, kindPerson) VALUES (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            st.setString(1, obj.getUsername());
-            st.setString(2, obj.getPassword());
-            st.setBoolean(3, obj.getStatus());
-            st.setLong(4, obj.getPerson().getId());
+            st.setString(1, obj.getName());
+            st.setString(2, obj.getCpf());
+            st.setString(3, obj.getTel());
+            st.setString(4, obj.getKindUser());
 
             int rowsAffected = st.executeUpdate();
 
@@ -55,16 +53,15 @@ public class UserDao implements UserDaoInter {
     }
 
     @Override
-    public User update(Long id, User obj) {
-
+    public Person update(Long id, Person obj) {
         PreparedStatement st = null;
 
         try {
-            st = conn.prepareStatement("UPDATE person SET userName = ?, password =  ?, status = ?, person_id = ? WHERE Id = ?");
-            st.setString(1, obj.getUsername());
-            st.setString(2, obj.getPassword());
-            st.setBoolean(3, obj.getStatus());
-            st.setLong(4, obj.getPerson().getId());
+            st = conn.prepareStatement("UPDATE person SET name = ?, cpf = ?, tel = ?, kindPerson = ? WHERE Id = ?");
+            st.setString(1, obj.getName());
+            st.setString(2, obj.getCpf());
+            st.setString(3, obj.getTel());
+            st.setString(4, obj.getKindUser());
             st.setLong(5, id);
             st.executeUpdate();
             return findById(id);
@@ -73,14 +70,13 @@ public class UserDao implements UserDaoInter {
         }finally {
             DB.closeStatement(st);
         }
-
     }
 
     @Override
     public void delete(Long id) {
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("DELETE FROM user WHERE Id = ?");
+            st = conn.prepareStatement("DELETE FROM person WHERE Id = ?");
 
             st.setLong(1, id);
             st.executeUpdate();
@@ -92,20 +88,19 @@ public class UserDao implements UserDaoInter {
     }
 
     @Override
-    public User findById(Long id) {
-
+    public Person findById(Long id) {
         PreparedStatement st = null;
         ResultSet rs = null;
 
         try {
 
-            st =  conn.prepareStatement("select * from user WHERE Id = ?");
+            st =  conn.prepareStatement("select * from person WHERE Id = ?");
             st.setLong(1, id);
             rs = st.executeQuery();
 
 
             if(rs.next()) {
-                return createNewUser(rs);
+                return createNewPerson(rs);
             }
 
         }catch(SQLException e) {
@@ -116,23 +111,22 @@ public class UserDao implements UserDaoInter {
         }
 
         return null;
-
     }
 
     @Override
-    public List<User> findAll() {
+    public List<Person> findAll() {
         Statement st = null;
         ResultSet rs = null;
-        List<User> uList = new ArrayList<>();
+        List<Person> pList = new ArrayList<>();
 
         try {
 
 
             st = conn.createStatement();
-            rs = st.executeQuery("select * from user");
+            rs = st.executeQuery("select * from person");
 
             while(rs.next()) {
-                uList.add(createNewUser(rs));
+                pList.add(createNewPerson(rs));
             }
         }catch(SQLException e) {
             throw new DbException(e.getMessage());
@@ -140,13 +134,11 @@ public class UserDao implements UserDaoInter {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
-        return uList;
+        return pList;
     }
 
-    public User createNewUser(ResultSet rs) throws SQLException{
-
-        Person person = DaoFactory.createPersonDao().findById(rs.getLong("id"));
-        return new User(rs.getLong("id"), rs.getString("userName"), rs.getString("password"), rs.getBoolean("status"), person);
+    public Person createNewPerson(ResultSet rs) throws SQLException{
+        return new Person(rs.getLong("id"), rs.getString("name"), rs.getString("cpf"), rs.getString("tel"), rs.getString("kindPerson"));
 
     }
 }

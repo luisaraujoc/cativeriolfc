@@ -1,8 +1,9 @@
-package com.luisaraujoc.cativeriolfc.controllers;
+package com.luisaraujoc.cativeriolfc.Controllers;
 
 
+import com.luisaraujoc.cativeriolfc.DTO.UserRequest;
 import com.luisaraujoc.cativeriolfc.Entity.User;
-import com.luisaraujoc.cativeriolfc.sevices.UserService;
+import com.luisaraujoc.cativeriolfc.Sevices.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,11 +39,14 @@ public class UserController {
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<User> insert(@RequestBody User obj){
-        User user =  UserService.insert(obj);
+    public ResponseEntity<User> insert(@RequestBody UserRequest userRequest) {
+        User obj = userRequest.getUser();
+        Long personId = userRequest.getPersonId();
+
+
+        User user = UserService.insert(obj, personId);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(user);
     }
-
 
 }

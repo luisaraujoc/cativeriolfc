@@ -1,9 +1,7 @@
-package com.luisaraujoc.cativeriolfc.dao;
+package com.luisaraujoc.cativeriolfc.Dao;
 
 
-import com.luisaraujoc.cativeriolfc.dao.implement.PersonDao;
-import com.luisaraujoc.cativeriolfc.dao.implement.UserDao;
-import com.luisaraujoc.cativeriolfc.db.DB;
+import com.luisaraujoc.cativeriolfc.Config.DB;
 
 public class DaoFactory {
 
