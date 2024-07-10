@@ -1,28 +1,39 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
-import com.luisaraujoc.cativeriolfc.Enum.Role;
+import java.io.Serializable;
+import java.util.Objects;
 
-public class Person {
+
+public class Person implements Serializable {
+
 
 	private Long id;
 
 	private String name;
 
-	private char nome;
+	private String cpf;
 
-	private char CPF;
+	private String tel;
 
-	private char Contato;
+	private String kindUser;
 
-	private char tipo;
+	public Person(){}
 
-	public Person(long id, char nome, char cPF, char contato, char tipo) {
-		this.id = id;
-		this.nome = nome;
-		CPF = cPF;
-		Contato = contato;
-		this.tipo = tipo;
+	public Person(String name, String cpf, String tel, String kindUser) {
+		this.name = name;
+		this.cpf = cpf;
+		this.tel = tel;
+		this.kindUser = kindUser;
 	}
+
+	public Person(Long id, String name, String cpf, String tel, String kindUser) {
+		this.id = id;
+		this.name = name;
+		this.cpf = cpf;
+		this.tel = tel;
+		this.kindUser = kindUser;
+	}
+
 
 	public Long getId() {
 		return id;
@@ -32,35 +43,59 @@ public class Person {
 		this.id = id;
 	}
 
-	public char getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(char nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public char getCPF() {
-		return CPF;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setCPF(char cPF) {
-		CPF = cPF;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
-	public char getContato() {
-		return Contato;
+	public String getTel() {
+		return tel;
 	}
 
-	public void setContato(char contato) {
-		Contato = contato;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
-	public char getTipo() {
-		return tipo;
+	public String getKindUser() {
+		return kindUser;
 	}
 
-	public void setTipo(char tipo) {
-		this.tipo = tipo;
+	public void setKindUser(String kindUser) {
+		this.kindUser = kindUser;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Person person = (Person) o;
+		return Objects.equals(id, person.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(id);
+	}
+
+	@Override
+	public String toString() {
+		return "Person{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", cpf='" + cpf + '\'' +
+				", tel='" + tel + '\'' +
+				", kindUser='" + kindUser + '\'' +
+				'}';
 	}
 }

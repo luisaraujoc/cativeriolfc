@@ -57,7 +57,7 @@ public class PersonDao  implements PersonDaoInter {
         PreparedStatement st = null;
 
         try {
-            st = conn.prepareStatement("UPDATE cativeriolfc SET name = ?, cpf = ?, tel = ?, kindPerson = ? WHERE Id = ?");
+            st = conn.prepareStatement("UPDATE person SET name = ?, cpf = ?, tel = ?, kindPerson = ? WHERE Id = ?");
             st.setString(1, obj.getName());
             st.setString(2, obj.getCpf());
             st.setString(3, obj.getTel());
@@ -76,7 +76,7 @@ public class PersonDao  implements PersonDaoInter {
     public void delete(Long id) {
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("DELETE FROM users WHERE Id = ?");
+            st = conn.prepareStatement("DELETE FROM person WHERE Id = ?");
 
             st.setLong(1, id);
             st.executeUpdate();
@@ -94,7 +94,7 @@ public class PersonDao  implements PersonDaoInter {
 
         try {
 
-            st =  conn.prepareStatement("select * from users WHERE Id = ?");
+            st =  conn.prepareStatement("select * from person WHERE Id = ?");
             st.setLong(1, id);
             rs = st.executeQuery();
 
@@ -123,7 +123,7 @@ public class PersonDao  implements PersonDaoInter {
 
 
             st = conn.createStatement();
-            rs = st.executeQuery("select * from users");
+            rs = st.executeQuery("select * from person");
 
             while(rs.next()) {
                 pList.add(createNewPerson(rs));
@@ -138,7 +138,7 @@ public class PersonDao  implements PersonDaoInter {
     }
 
     public Person createNewPerson(ResultSet rs) throws SQLException{
-        return new Person(rs.getLong("id"), rs.getString("name"), rs.getString("cpf"), rs.getString("tel"), rs.getString("kindUser"));
+        return new Person(rs.getLong("id"), rs.getString("name"), rs.getString("cpf"), rs.getString("tel"), rs.getString("kindPerson"));
 
     }
 }

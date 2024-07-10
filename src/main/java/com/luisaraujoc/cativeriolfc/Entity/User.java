@@ -1,56 +1,65 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
-import com.luisaraujoc.cativeriolfc.Util.Cryptography;
+import com.luisaraujoc.cativeriolfc.dao.DaoFactory;
 
-public class User {
+import java.io.Serializable;
+import java.util.Objects;
 
-    private long id;
 
-	private char username;
+public class User implements Serializable {
 
-	private char passoword;
 
-    private boolean status;
+    private Long id;
+
+	private String username;
+
+	private String password;
+
+    private Boolean status;
 
     private Person person;
 
-	public User(long id, char username, char passoword, boolean status, Person person) {
-		this.id = id;
-		this.username = username;
-		this.passoword = passoword;
-		this.status = status;
-		this.person = person;
-	}
+    public User(){
 
-    public long getId() {
+    }
+
+    public User(Long id, String username, String password, Boolean status, Person person) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.person = person;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-	public char getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(char username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public char getPassoword() {
-		return passoword;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassoword(char passowrd) {
-		this.passoword = passowrd;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
@@ -60,5 +69,29 @@ public class User {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", person=" + person +
+                '}';
     }
 }
