@@ -2,38 +2,51 @@ package com.luisaraujoc.cativeriolfc.Entity;
 
 public class Convidado {
 
-	private long id;
-	private User user;
-	private String nome;
+    private Long id;
+    private String name;
+    private Person host;
 
-	public Convidado(long id, User user, String nome) {
-		this.id = id;
-		this.user = user;
-		this.nome = nome;
-	}
+    // Constructors
+    public Convidado() {
+    }
 
-	public long getId() {
-		return id;
-	}
+    public Convidado(String name, Person host) {
+        this.name = name;
+        this.host = host;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
+    public Person getHost() {
+        return host;
+    }
+
+    public void setHost(Person host) {
+        this.host = host;
+    }
+
+    // toString method
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", host=" + host.toString() +
+                '}';
+    }
 }

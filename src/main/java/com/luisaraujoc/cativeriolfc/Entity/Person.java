@@ -3,6 +3,9 @@ package com.luisaraujoc.cativeriolfc.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.luisaraujoc.cativeriolfc.Enum.Role;
+
+
 
 public class Person implements Serializable {
 

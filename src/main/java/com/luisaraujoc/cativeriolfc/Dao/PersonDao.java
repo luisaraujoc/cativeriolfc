@@ -2,6 +2,7 @@ package com.luisaraujoc.cativeriolfc.Dao;
 
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Interface.PersonDaoInter;
+import com.luisaraujoc.cativeriolfc.Util.ValidateCPF;
 import com.luisaraujoc.cativeriolfc.Config.DB;
 import com.luisaraujoc.cativeriolfc.Exception.DbException;
 
@@ -22,29 +23,31 @@ public class PersonDao  implements PersonDaoInter {
         ResultSet rs = null;
 
         try {
-
-            st = conn.prepareStatement("INSERT INTO person (name, cpf, tel, kindPerson) VALUES (?, ?, ?, ?)",
+            if (ValidateCPF.isCPF(obj.getCpf())){
+                st = conn.prepareStatement("INSERT INTO person (name, cpf, tel, kindPerson) VALUES (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            st.setString(1, obj.getName());
-            st.setString(2, obj.getCpf());
-            st.setString(3, obj.getTel());
-            st.setString(4, obj.getKindUser());
+                st.setString(1, obj.getName());
+                st.setString(2, obj.getCpf());
+                st.setString(3, obj.getTel());
+                st.setString(4, obj.getKindUser());
 
-            int rowsAffected = st.executeUpdate();
+                int rowsAffected = st.executeUpdate();
 
-            if (rowsAffected > 0) {
-                rs = st.getGeneratedKeys();
-                if (rs.next()) {
-                    Long id = rs.getLong(1);
-                    return findById(id);
+                if (rowsAffected > 0) {
+                    rs = st.getGeneratedKeys();
+                    if (rs.next()) {
+                        Long id = rs.getLong(1);
+                        return findById(id);
+                    } else {
+                        throw new DbException("Falha ao obter o id gerado após a inserção.");
+                    }
                 } else {
-                    throw new DbException("Falha ao obter o id gerado após a inserção.");
+                    throw new DbException("Nenhuma linha afetada ao inserir o usuário.");
                 }
-            } else {
-                throw new DbException("Nenhuma linha afetada ao inserir o usuário.");
+            }else{
+                throw new DbException("CPF inválido.");
             }
-
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }finally {
