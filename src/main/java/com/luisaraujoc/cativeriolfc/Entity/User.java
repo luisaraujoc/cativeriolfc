@@ -11,24 +11,26 @@ public class User implements Serializable {
 
     private Long id;
 
-	private String username;
+    private String username;
 
-	private String password;
+    private String password;
 
     private Boolean status;
 
     private Person person;
 
-    public User(){
+    public User() {
 
     }
 
-    public User(Long id, String username, String password, Boolean status, Person person) {
+    public User(Long id, String username, String password, Boolean status, Long person_id) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.status = status;
-        this.person = person;
+        if (person_id != null) {
+            this.person = DaoFactory.createPersonDao().findById(person_id);
+        }
     }
 
     public Long getId() {

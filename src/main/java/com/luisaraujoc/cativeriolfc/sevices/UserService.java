@@ -10,24 +10,25 @@ public class UserService {
 
     public static UserDao userDao = DaoFactory.createUserDao();
 
-    public static List<User> findAll(){
+    public static List<User> findAll() {
         return userDao.findAll();
     }
 
-    public static User findById(Long id){
+    public static User findById(Long id) {
         return userDao.findById(id);
     }
 
-    public static void delete(Long id){
+    public static void delete(Long id) {
         userDao.delete(id);
     }
 
-    public static User update(Long id, User obj){
+    public static User update(Long id, User obj) {
         return userDao.update(id, obj);
     }
 
-    public static User insert(User obj){
-        return userDao.insert(obj);
+    public static User insert(User obj, Long personId) {
+        return userDao.insert(obj, personId);
+
     }
 
 }
