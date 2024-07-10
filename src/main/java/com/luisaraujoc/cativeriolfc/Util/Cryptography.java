@@ -1,4 +1,4 @@
-package com.luisaraujoc.cativeriolfc.Util;
+/*package com.luisaraujoc.cativeriolfc.Util;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -16,3 +16,4 @@ public class Cryptography {
         return BCrypt.checkpw(password, hashed);
     }
 }
+*/
