@@ -25,7 +25,7 @@ public class PersonDao implements PersonDaoInter {
         }
 
         try {
-            Role.fromValue(obj.getKindUser().getValue());
+            Role.fromValue(obj.getKindPerson().getValue());
         } catch (IllegalArgumentException e) {
             throw new DbException("Nível de usuário invalido.");
         }
@@ -44,7 +44,7 @@ public class PersonDao implements PersonDaoInter {
             st.setString(1, obj.getName());
             st.setString(2, obj.getCpf());
             st.setString(3, obj.getTel());
-            st.setString(4, obj.getKindUser().getValue());
+            st.setString(4, obj.getKindPerson().getValue());
 
             int rowsAffected = st.executeUpdate();
 
@@ -76,7 +76,7 @@ public class PersonDao implements PersonDaoInter {
             st.setString(1, obj.getName());
             st.setString(2, obj.getCpf());
             st.setString(3, obj.getTel());
-            st.setString(4, obj.getKindUser().getValue());
+            st.setString(4, obj.getKindPerson().getValue());
             st.setLong(5, id);
             st.executeUpdate();
             return findById(id);

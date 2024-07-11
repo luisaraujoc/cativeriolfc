@@ -50,6 +50,7 @@ public class UserDao implements UserDaoInter {
             }
 
         } catch (SQLException e) {
+            DaoFactory.createPersonDao().delete(personId);
             throw new DbException(e.getMessage());
         }finally {
             DB.closeStatement(st);

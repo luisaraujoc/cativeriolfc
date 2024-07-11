@@ -1,33 +1,36 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 import com.luisaraujoc.cativeriolfc.Enum.Role;
 
 public class Person implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String name;
     private String cpf;
     private String tel;
-    private Role kindUser;
+    private Role kindPerson;
 
     public Person() {}
 
-    public Person(String name, String cpf, String tel, Role kindUser) {
+    public Person(String name, String cpf, String tel, Role kindPerson) {
         this.name = name;
         this.cpf = cpf;
         this.tel = tel;
-        this.kindUser = kindUser;
+        this.kindPerson = kindPerson;
     }
 
-    public Person(Long id, String name, String cpf, String tel, Role kindUser) {
+    public Person(Long id, String name, String cpf, String tel, Role kindPerson) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.tel = tel;
-        this.kindUser = kindUser;
+        this.kindPerson = kindPerson;
     }
 
     public Long getId() {
@@ -62,12 +65,12 @@ public class Person implements Serializable {
         this.tel = tel;
     }
 
-    public Role getKindUser() {
-        return kindUser;
+    public Role getKindPerson() {
+        return kindPerson;
     }
 
-    public void setKindUser(Role kindUser) {
-        this.kindUser = kindUser;
+    public void setKindPerson(Role kindPerson) {
+        this.kindPerson = kindPerson;
     }
 
     @Override
@@ -90,7 +93,7 @@ public class Person implements Serializable {
                 ", name='" + name + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", tel='" + tel + '\'' +
-                ", kindUser='" + kindUser + '\'' +
+                ", kindUser='" + kindPerson + '\'' +
                 '}';
     }
 }
