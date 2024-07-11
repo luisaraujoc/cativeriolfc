@@ -1,10 +1,13 @@
 package com.luisaraujoc.cativeriolfc.DTO;
 
 import com.luisaraujoc.cativeriolfc.Entity.User;
+import com.luisaraujoc.cativeriolfc.Entity.Person;
 
-public class UserRequest {
+import java.io.Serializable;
+
+public class UserRequest implements Serializable {
     private User user;
-    private Long personId;
+    private Person Person;
 
 
     public User getUser() {
@@ -15,11 +18,11 @@ public class UserRequest {
         this.user = user;
     }
 
-    public Long getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return Person;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    public void setPerson(Person person) {
+        Person = person;
     }
 }

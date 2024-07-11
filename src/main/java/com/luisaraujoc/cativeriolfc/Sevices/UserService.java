@@ -1,5 +1,6 @@
 package com.luisaraujoc.cativeriolfc.Sevices;
 
+import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Entity.User;
 import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
 import com.luisaraujoc.cativeriolfc.Dao.UserDao;
@@ -26,9 +27,9 @@ public class UserService {
         return userDao.update(id, obj);
     }
 
-    public static User insert(User obj, Long personId) {
-        return userDao.insert(obj, personId);
-
+    public static User insert(User obj, Person person) {
+        person = DaoFactory.createPersonDao().insert(person);
+        return userDao.insert(obj, person.getId());
     }
 
 }
