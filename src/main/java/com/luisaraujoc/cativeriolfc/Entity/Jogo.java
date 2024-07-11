@@ -3,7 +3,7 @@ package com.luisaraujoc.cativeriolfc.Entity;
 public class Jogo {
 
 	private long id;
-	private Time Times;
+	private Team times;
 	
 	public long getId() {
 		return id;
@@ -11,10 +11,10 @@ public class Jogo {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Time getTimes() {
-		return Times;
+	public Team getTimes() {
+		return times;
 	}
-	public void setTimes(Time times) {
-		Times = times;
+	public void setTimes(Team times) {
+		this.times = times;
 	}
 }
