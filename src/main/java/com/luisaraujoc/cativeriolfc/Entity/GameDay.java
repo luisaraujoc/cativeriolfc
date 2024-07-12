@@ -5,16 +5,15 @@ import java.util.*;
 
 public class GameDay {
 
-	private long id;
+	private Long id;
 	private Date date;
 	private List<Team> teams = new ArrayList<>();
 	private List<Person> currentPlayers = new ArrayList<>();
 
 
-	public GameDay(long id, Date date, List<Team> teams, List<Person> currentPlayers) {
+	public GameDay(long id, Date date, List<Person> currentPlayers) {
 		this.id = id;
 		this.date = date;
-		this.teams = teams;
 		this.currentPlayers = currentPlayers;
 	}
 
@@ -76,23 +75,8 @@ public class GameDay {
 				'}';
 	}
 
-	public List<Team> generateTeams(){
-		Random random = new Random();
-		List<Person> playersToAdd = currentPlayers;
-		List<Person> currentTeam = new ArrayList<>();
-		List<Team> generatedTeams = new ArrayList<>();
+	public void generateTeams(){
 
-		for(int u = 0; u < currentPlayers.size()/5; u++) {
-			for (int i = 0; i < 4; i++) {
-				int randomNum = random.nextInt(playersToAdd.size());
-				currentTeam.add(playersToAdd.get(randomNum));
-				playersToAdd.remove(randomNum);
-				String teamName = "Team "+u+1;
-				generatedTeams.add(new Team(null, teamName, currentTeam));
-			}
-		}
-
-		return generatedTeams;
 	}
 }
 

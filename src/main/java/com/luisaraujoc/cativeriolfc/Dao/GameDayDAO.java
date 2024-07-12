@@ -48,7 +48,7 @@ public class GameDayDAO {
             while (rs.next()){
                 Person person = null;
                 gameDay.addCurrentPlayers(
-                        person = PersonDao.findById(
+                        person = DaoFactory.createPersonDao().findById(
                                 rs.getLong("person_id")
                         )
                 );
@@ -79,7 +79,7 @@ public class GameDayDAO {
             while (rs.next()){
                 Team team = null;
                 gameDay.addTeam(
-                        team = TeamDao.findById(
+                        team = DaoFactory.createTeamDao().findById(
                                 rs.getLong("team_id")
                         )
                 );

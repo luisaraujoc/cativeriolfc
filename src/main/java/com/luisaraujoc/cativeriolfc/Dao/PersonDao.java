@@ -1,5 +1,6 @@
 package com.luisaraujoc.cativeriolfc.Dao;
 
+import com.luisaraujoc.cativeriolfc.Entity.GameDay;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Enum.Role;
 import com.luisaraujoc.cativeriolfc.Interface.PersonDaoInter;
@@ -149,6 +150,28 @@ public class PersonDao implements PersonDaoInter {
         try {
             st = conn.createStatement();
             rs = st.executeQuery("SELECT * FROM person");
+
+            while (rs.next()) {
+                pList.add(createNewPerson(rs));
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
+        return pList;
+    }
+
+    public List<Person> findByGameDay(GameDay gameDay){
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<Person> pList = new ArrayList<>();
+
+        try {
+            st = conn.prepareStatement("SELECT * FROM current_player WHERE gameDay_id = ?");
+            st.setLong(1, gameDay.getId());
+            rs = st.executeQuery();
 
             while (rs.next()) {
                 pList.add(createNewPerson(rs));
