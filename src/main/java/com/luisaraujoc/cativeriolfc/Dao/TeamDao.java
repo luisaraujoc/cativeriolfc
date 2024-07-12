@@ -110,6 +110,7 @@ public class TeamDao {
 //        ResultSet rs = null;
 //
 //        try{
+//            // selecionar todos os times que participaram de um determinado gameday
 //            st = conn.prepareStatement("Select * from gameday_team where gameday_id = ?");
 //            st.setLong(1, gameDayId);
 //
