@@ -1,6 +1,7 @@
 package com.luisaraujoc.cativeriolfc.Dao;
 
 import com.luisaraujoc.cativeriolfc.Config.DB;
+import com.luisaraujoc.cativeriolfc.Interface.GameDayTeamDaoInter;
 
 public class DaoFactory {
 
@@ -23,4 +24,6 @@ public class DaoFactory {
     public static TeamDao createTeamDao(){
         return new TeamDao(DB.getConnection());
     }
+
+    public static GameDayTeamDaoInter createGameDayTeamDao(){return new GameDayTeamDAO(DB.getConnection());}
 }

@@ -15,7 +15,7 @@ public class TeamDao {
         this.conn = conn;
     }
 
-    public void createTeam(Team team){
+    public Team createTeam(Team team){
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -25,6 +25,20 @@ public class TeamDao {
             );
 
             st.setString(1, team.getName());
+
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected > 0) {
+                rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    Long id = rs.getLong("id");
+                    return findById(id);
+                } else {
+                    throw new DbException("Falha ao obter o id gerado após a inserção.");
+                }
+            } else {
+                throw new DbException("Nenhuma linha afetada ao inserir o usuário.");
+            }
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -34,7 +48,7 @@ public class TeamDao {
         }
     }
 
-    public static Team findById(Long teamId){
+    public Team findById(Long teamId){
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -63,7 +77,7 @@ public class TeamDao {
         }
     }
 
-    public static Team findAll(){
+    public Team findAll(){
         PreparedStatement st = null;
         ResultSet rs = null;
 

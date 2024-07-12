@@ -1,5 +1,6 @@
 package com.luisaraujoc.cativeriolfc.Interface;
 
+import com.luisaraujoc.cativeriolfc.Entity.GameDay;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface PersonDaoInter {
     public void delete(Long id);
     public Person findById(Long id);
     public List<Person> findAll();
+    public List<Person> findByGameDay(GameDay gameDay);
 }
