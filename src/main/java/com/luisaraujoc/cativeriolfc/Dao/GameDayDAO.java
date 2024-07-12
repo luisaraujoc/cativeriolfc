@@ -19,7 +19,7 @@ public class GameDayDAO {
 
     public void createGameDay (GameDay gameDay){
         PreparedStatement st = null;
-        ResultSet rs = null;
+
 
         try{
             st = conn.prepareStatement("INSERT INTO gameday (date) VALUES (?)",Statement.RETURN_GENERATED_KEYS);

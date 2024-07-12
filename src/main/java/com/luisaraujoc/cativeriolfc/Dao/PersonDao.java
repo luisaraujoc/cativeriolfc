@@ -20,14 +20,29 @@ public class PersonDao implements PersonDaoInter {
     }
 
     private void validatePerson(Person obj) {
-        if (!ValidateCPF.isCPF(obj.getCpf())) {
-            throw new DbException("CPF inválido ou já cadastrado.");
-        }
+        String cpf = obj.getCpf();
+        Role kindPerson = obj.getKindPerson();
+
+        PreparedStatement st = null;
+        ResultSet rs = null;
 
         try {
-            Role.fromValue(obj.getKindPerson().getValue());
-        } catch (IllegalArgumentException e) {
-            throw new DbException("Nível de usuário invalido.");
+            st = conn.prepareStatement("SELECT * FROM person WHERE cpf = ?");
+            st.setString(1, cpf);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                throw new DbException("CPF inválido ou já cadastrado.");
+            } else if (!ValidateCPF.isCPF(cpf)){
+                throw new DbException("CPF inválido ou já cadastrado.");
+            }else if (kindPerson != Role.ADMIN && kindPerson != Role.USER){
+                throw new DbException("Nível de usuário inválido.");
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
         }
     }
 
