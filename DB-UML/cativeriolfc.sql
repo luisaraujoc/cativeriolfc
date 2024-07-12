@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `team` (
 -- Despejando dados para a tabela `team`
 --
 
-INSERT INTO `team` (`id`, `nome`) VALUES
+INSERT INTO `team` (`id`, name) VALUES
 (1, 'Team A'),
 (2, 'Team B');
 

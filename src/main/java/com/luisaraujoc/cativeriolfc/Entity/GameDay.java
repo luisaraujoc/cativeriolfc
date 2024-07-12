@@ -76,18 +76,7 @@ public class GameDay {
 	}
 
 	public void generateTeams(){
-		/*Random random = new Random();
-		List<Person> playersToAdd = currentPlayers;
-		List<Person> currentTeam = new ArrayList<>();
-		List<Team> generatedTeams = new ArrayList<>();
 
-		for(int u = 0; u < currentPlayers.size()/5; u++) {
-			for (int i = 0; i < 4; i++) {
-				currentTeam.add(playersToAdd.get(random.nextInt(playersToAdd.size())));
-			}
-			addTeam(new);
-		}
-*/
 	}
 }
 

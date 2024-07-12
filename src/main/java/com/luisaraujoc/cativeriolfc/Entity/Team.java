@@ -16,6 +16,11 @@ public class Team {
 		this.players = players;
 	}
 
+	public Team( String name, List<Person> players) {
+		this.name = name;
+		this.players = players;
+	}
+
 	public Long getId() {
 		return id;
 	}

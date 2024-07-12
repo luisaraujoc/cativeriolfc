@@ -6,6 +6,7 @@ import com.luisaraujoc.cativeriolfc.Entity.Team;
 import com.luisaraujoc.cativeriolfc.Enum.Role;
 import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
 import com.luisaraujoc.cativeriolfc.Dao.PersonDao;
+import com.luisaraujoc.cativeriolfc.Util.generateTeam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,13 +28,9 @@ public class daoTester {
         Date date = sdf.parse("11/07/2024");
         GameDay gd = new GameDay(4, date, pList);
 
-        System.out.println(gd);
+        generateTeam.handleCreation(gd);
 
-        List<Team> teams = gd.generateTeams();
 
-        for (Team team : teams) {
-            System.out.println(team);
-        }
 
 
 
