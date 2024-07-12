@@ -15,4 +15,12 @@ public class DaoFactory {
     public static GuestDao createGuestDao(){
         return new GuestDao(DB.getConnection());
     }
+
+    public static GameDayDAO createGameDayDao(){
+        return new GameDayDAO(DB.getConnection());
+    }
+
+    public static TeamDao createTeamDao(){
+        return new TeamDao(DB.getConnection());
+    }
 }
