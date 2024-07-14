@@ -1,6 +1,8 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
 
+import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
+
 import java.util.*;
 
 public class GameDay {
@@ -48,8 +50,8 @@ public class GameDay {
 		return currentPlayers;
 	}
 
-	public void addCurrentPlayers(Person person) {
-		this.currentPlayers.add(person);
+	public void findCurrentPlayers() {
+		currentPlayers = DaoFactory.createCurrentPlayerDao().findPeopleByIdGameDay(this.id);
 	}
 
 	@Override
@@ -75,8 +77,5 @@ public class GameDay {
 				'}';
 	}
 
-	public void generateTeams(){
-
-	}
 }
 

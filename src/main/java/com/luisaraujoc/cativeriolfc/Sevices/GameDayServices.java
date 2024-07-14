@@ -32,7 +32,7 @@ public class GameDayServices {
 //    public static GameDay update(Long id, GameDay gameDay) {
 //        return gameDayDAO.update(id, gameDay);
 //    }
-
+/*
     public static List<Person> findCurrentPlayers(GameDay gameDay) {
         return gameDayDAO.findCurrentPlayers(gameDay);
     }
@@ -40,4 +40,7 @@ public class GameDayServices {
     public static List<Team> findTeams(GameDay gameDay) {
         return gameDayDAO.findTeams(gameDay);
     }
+
+
+ */
 }

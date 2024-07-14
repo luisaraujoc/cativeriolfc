@@ -11,5 +11,4 @@ public interface PersonDaoInter {
     public void delete(Long id);
     public Person findById(Long id);
     public List<Person> findAll();
-    public List<Person> findByGameDay(GameDay gameDay);
 }

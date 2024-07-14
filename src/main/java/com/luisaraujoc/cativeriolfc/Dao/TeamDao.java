@@ -21,7 +21,7 @@ public class TeamDao {
 
         try{
             st = conn.prepareStatement(
-                    "INSERT INTO team (name) values (?)", Statement.RETURN_GENERATED_KEYS
+                    "INSERT INTO team (nome) values (?)", Statement.RETURN_GENERATED_KEYS
             );
 
             st.setString(1, team.getName());
@@ -31,7 +31,7 @@ public class TeamDao {
             if (rowsAffected > 0) {
                 rs = st.getGeneratedKeys();
                 if (rs.next()) {
-                    Long id = rs.getLong("id");
+                    Long id = rs.getLong(1);
                     return findById(id);
                 } else {
                     throw new DbException("Falha ao obter o id gerado após a inserção.");
@@ -61,7 +61,7 @@ public class TeamDao {
             if (rs.next()){
                 return new Team(
                         rs.getLong("id"),
-                        rs.getString("name"),
+                        rs.getString("nome"),
                         null
                 );
             }

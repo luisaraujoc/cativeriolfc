@@ -3,10 +3,9 @@ package com.luisaraujoc.cativeriolfc;
 import com.luisaraujoc.cativeriolfc.Entity.GameDay;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Entity.Team;
-import com.luisaraujoc.cativeriolfc.Enum.Role;
 import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
 import com.luisaraujoc.cativeriolfc.Dao.PersonDao;
-import com.luisaraujoc.cativeriolfc.Util.generateTeam;
+import com.luisaraujoc.cativeriolfc.Util.GenerateTeam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,17 +18,29 @@ public class daoTester {
         List<Person> pList = new ArrayList<Person>();
         PersonDao pdao = DaoFactory.createPersonDao();
         List<Person> persons = pdao.findAll();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
-        for (int i = 0; i < 25; i++) {
-            pList.add(persons.get(i));
+        Date date = sdf.parse("2024-07-12");
+        GameDay gd = new GameDay(1, date, pList);
+
+        gd.findCurrentPlayers();
+
+        for (Person person : gd.getCurrentPlayers()) {
+            System.out.println(person);
         }
-        Date date = sdf.parse("11/07/2024");
-        GameDay gd = new GameDay(4, date, pList);
 
-        generateTeam.handleCreation(gd);
+        GenerateTeam.handleCreation(gd);
 
+        for(Team t : gd.getTeams()) {
+            System.out.println(t.getName());
+
+            for(Person p : t.getPlayers()) {
+                System.out.println(p.getName());
+            }
+
+            System.out.println("==============================================");
+        }
 
 
 

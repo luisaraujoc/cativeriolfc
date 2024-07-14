@@ -26,4 +26,6 @@ public class DaoFactory {
     }
 
     public static GameDayTeamDaoInter createGameDayTeamDao(){return new GameDayTeamDAO(DB.getConnection());}
+
+    public static CurrentPlayerDao createCurrentPlayerDao(){return new CurrentPlayerDao(DB.getConnection());}
 }

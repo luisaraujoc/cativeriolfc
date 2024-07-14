@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CurrentPlayerDaoInter {
     void insert(GameDay gameDay, Person person);
-    List<Person> findPeopleByIdGameDay(GameDay gameDay);
+    List<Person> findPeopleByIdGameDay(Long gameDayId);
     Person update(Long id, Person obj);
     void delete(GameDay gameDay, Person person);
     List<Person> findAll();
