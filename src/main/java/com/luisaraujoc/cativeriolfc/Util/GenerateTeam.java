@@ -21,7 +21,12 @@ public class GenerateTeam {
 			}
 			String name = "TIME " + (u +1);
 			Team team = DaoFactory.createTeamDao().createTeam(new Team(name, currentTeam));
+
+			for (Person p : team.getPlayers()) {
+				System.out.println(p.getName());
+			}
 			DaoFactory.createGameDayTeamDao().insert(gameDay, team);
+			matchTeamPerson(gameDay, team);
 		}
 
 		List<Team> TeamsInGameDay = DaoFactory.createGameDayTeamDao().findTeamsByIdGameDay(gameDay);
@@ -31,4 +36,13 @@ public class GenerateTeam {
 		}
 
     }
+
+	private static void matchTeamPerson(GameDay gameDay, Team team){
+
+		for (Person player: team.getPlayers()) {
+			Long currentPlayerId = DaoFactory.createCurrentPlayerDao().findCurrentPlayerId(player, gameDay);
+
+			DaoFactory.createTeamPersonDao().insert(team, currentPlayerId);
+		}
+	}
 }

@@ -26,10 +26,10 @@ public class daoTester {
 
         gd.findCurrentPlayers();
 
-        for (Person person : gd.getCurrentPlayers()) {
-            System.out.println(person);
+        for (Person p : gd.getCurrentPlayers()) {
+            System.out.println(p);
         }
-
+        /*
         GenerateTeam.handleCreation(gd);
 
         for(Team t : gd.getTeams()) {
@@ -41,7 +41,7 @@ public class daoTester {
 
             System.out.println("==============================================");
         }
-
+*/
 
 
 
