@@ -10,4 +10,5 @@ public interface GameDayDaoInter {
 
     public void createGameDay(GameDay gameDay);
     public List<Team> findTeams(GameDay gameDay);
+    public GameDay findById(Long id);
 }

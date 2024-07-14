@@ -1,5 +1,7 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
+import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,11 +17,17 @@ public class Team {
 		this.name = name;
 		this.players = players;
 	}
+	public Team(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
 	public Team( String name, List<Person> players) {
 		this.name = name;
 		this.players = players;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -41,8 +49,8 @@ public class Team {
 		return players;
 	}
 
-	public void setPlayers(List<Person> players) {
-		this.players = players;
+	public void findPlayers() {
+		players = DaoFactory.createTeamPersonDao().findPeopleByIdTeam(this.id);
 	}
 
 	@Override

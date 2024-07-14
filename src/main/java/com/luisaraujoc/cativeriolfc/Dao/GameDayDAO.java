@@ -66,4 +66,28 @@ public class GameDayDAO implements GameDayDaoInter {
             DB.closeResultSet(null);
         }
     }
+
+    @Override
+    public GameDay findById(Long id) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement("SELECT * FROM gameday WHERE Id = ?");
+            st.setLong(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                List<Person> currentPlayers= DaoFactory.createCurrentPlayerDao().findPeopleByIdGameDay(rs.getLong("id"));
+                return new GameDay(rs.getLong("id"), rs.getDate("date"),currentPlayers);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
+        return null;
+    }
+
 }
