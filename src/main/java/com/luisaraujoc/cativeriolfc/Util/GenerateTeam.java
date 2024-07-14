@@ -37,11 +37,9 @@ public class GenerateTeam {
 			currentTeam.clear();
 		}
 
-		List<Team> TeamsInGameDay = gtd.findTeamsByIdGameDay(gameDay);
+		List<Team> TeamsInGameDay = gtd.findTeamsByIdGameDay(gameDay.getId());
 
-		for(Team team : TeamsInGameDay) {
-			gameDay.addTeam(team);
-		}
+		gameDay.findCurrentTeams();
 
     }
 

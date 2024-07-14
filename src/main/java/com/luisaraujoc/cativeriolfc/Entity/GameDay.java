@@ -42,8 +42,8 @@ public class GameDay {
 		return teams;
 	}
 
-	public void addTeam(Team team) {
-		this.teams.add(team);
+	public void findCurrentTeams() {
+		this.teams = DaoFactory.createGameDayTeamDao().findTeamsByIdGameDay(this.id);
 	}
 
 	public List<Person> getCurrentPlayers() {

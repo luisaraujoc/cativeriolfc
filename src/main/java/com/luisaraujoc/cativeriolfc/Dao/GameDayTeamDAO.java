@@ -42,7 +42,7 @@ public class GameDayTeamDAO implements GameDayTeamDaoInter {
     }
 
     @Override
-    public List<Team> findTeamsByIdGameDay(GameDay gameDay) {
+    public List<Team> findTeamsByIdGameDay(Long idGameDay) {
         PreparedStatement st = null;
         ResultSet rs = null;
         List<Team> teams = new ArrayList<>();
@@ -50,7 +50,7 @@ public class GameDayTeamDAO implements GameDayTeamDaoInter {
         try {
 
             st =  conn.prepareStatement("select * from gameday_Team WHERE gameDay_id = ?");
-            st.setLong(1, gameDay.getId());
+            st.setLong(1, idGameDay);
             rs = st.executeQuery();
 
 

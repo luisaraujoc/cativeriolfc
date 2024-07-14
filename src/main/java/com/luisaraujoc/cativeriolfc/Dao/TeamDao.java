@@ -5,13 +5,14 @@ import com.luisaraujoc.cativeriolfc.Entity.GameDay;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Entity.Team;
 import com.luisaraujoc.cativeriolfc.Exception.DbException;
+import com.luisaraujoc.cativeriolfc.Interface.TeamDaoInter;
 
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamDao {
+public class TeamDao implements TeamDaoInter {
 
     private static Connection conn;
 

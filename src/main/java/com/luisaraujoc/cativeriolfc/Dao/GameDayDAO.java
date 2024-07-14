@@ -10,6 +10,7 @@ import com.luisaraujoc.cativeriolfc.Interface.GameDayDaoInter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class GameDayDAO implements GameDayDaoInter {
 
@@ -19,7 +20,7 @@ public class GameDayDAO implements GameDayDaoInter {
         this.conn = conn;
     }
 
-    public void createGameDay (GameDay gameDay){
+    public GameDay createGameDay (GameDay gameDay){
         PreparedStatement st = null;
 
 
@@ -27,37 +28,12 @@ public class GameDayDAO implements GameDayDaoInter {
             st = conn.prepareStatement("INSERT INTO gameday (date) VALUES (?)",Statement.RETURN_GENERATED_KEYS);
 
             st.setDate(1, new java.sql.Date(gameDay.getDate().getTime()));
-        }
-        catch (SQLException e) {
-            throw new DbException(e.getMessage());
-        } finally {
-            DB.closeStatement(st);
-            DB.closeResultSet(null);
-        }
-    }
-
-    public List<Team> findTeams(GameDay gameDay){
-        PreparedStatement st = null;
-        ResultSet rs = null;
-
-        try{
-            st = conn.prepareStatement("select * from gameday_team where gameDay_id = ?");
-            st.setLong(1, gameDay.getId());
-
-            rs = st.executeQuery();
-
-            List<Team> teams = new ArrayList<>();
-            while (rs.next()){
-                Team team = null;
-                gameDay.addTeam(
-                        team = DaoFactory.createTeamDao().findById(
-                                rs.getLong("team_id")
-                        )
-                );
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if(rs.next()){
+                gameDay.setId(rs.getInt(1));
+                return gameDay;
             }
-
-            // quando acabar, retorna a lista
-            return gameDay.getTeams();
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -65,7 +41,11 @@ public class GameDayDAO implements GameDayDaoInter {
             DB.closeStatement(st);
             DB.closeResultSet(null);
         }
+
+        return null;
     }
+
+
 
     @Override
     public GameDay findById(Long id) {
@@ -79,7 +59,34 @@ public class GameDayDAO implements GameDayDaoInter {
 
             if (rs.next()) {
                 List<Person> currentPlayers= DaoFactory.createCurrentPlayerDao().findPeopleByIdGameDay(rs.getLong("id"));
-                return new GameDay(rs.getLong("id"), rs.getDate("date"),currentPlayers);
+                GameDay gd = new GameDay(rs.getLong("id"), rs.getDate("date"),currentPlayers);
+                gd.findCurrentTeams();
+                return gd;
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
+        return null;
+    }
+
+    @Override
+    public GameDay findByDate(String date) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = conn.prepareStatement("SELECT * FROM gameday WHERE date = ?");
+            st.setString(1, date);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                List<Person> currentPlayers= DaoFactory.createCurrentPlayerDao().findPeopleByIdGameDay(rs.getLong("id"));
+                GameDay gd = new GameDay(rs.getLong("id"), rs.getDate("date"),currentPlayers);
+                gd.findCurrentTeams();
+                return gd;
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
