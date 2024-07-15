@@ -1,4 +1,4 @@
-# Getting Started - dev branch
+# Getting Started 
 
 ### Reference Documentation
 
