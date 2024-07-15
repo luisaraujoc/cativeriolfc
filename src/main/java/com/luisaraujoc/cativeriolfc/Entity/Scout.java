@@ -2,23 +2,35 @@ package com.luisaraujoc.cativeriolfc.Entity;
 
 public class Scout {
 
-	private long id;
+    private long id;
 
-	private Person jogador;
+    private Long playerId;
 
-	private Jogo jogo;
+    private Long gameId;
 
-	private int gols;
+    private Long teamId;
 
-	private int assistencias;
+    private int goals;
 
-	public Scout(long id, Person jogador, Jogo jogo, int gols, int assistencias) {
-		this.id = id;
-		this.jogador = jogador;
-		this.jogo = jogo;
-		this.gols = gols;
-		this.assistencias = assistencias;
-	}
+    private int assists;
+
+    private int yellowCard;
+
+    private int redCard;
+
+    public Scout() {
+    }
+
+    public Scout(long id, Long playerId, Long gameId, Long teamId, int goals, int assists, int yellowCard, int redCard) {
+        this.id = id;
+        this.playerId = playerId;
+        this.gameId = gameId;
+        this.teamId = teamId;
+        this.goals = goals;
+        this.assists = assists;
+        this.yellowCard = yellowCard;
+        this.redCard = redCard;
+    }
 
     public long getId() {
         return id;
@@ -28,36 +40,60 @@ public class Scout {
         this.id = id;
     }
 
-    public Person getJogador() {
-        return jogador;
+    public Long getPlayerId() {
+        return playerId;
     }
 
-    public void setJogador(Person jogador) {
-        this.jogador = jogador;
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
     }
 
-    public Jogo getJogo() {
-        return jogo;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setJogo(Jogo jogo) {
-        this.jogo = jogo;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
-    public int getGols() {
-        return gols;
+    public Long getTeamId() {
+        return teamId;
     }
 
-    public void setGols(int gols) {
-        this.gols = gols;
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 
-    public int getAssistencias() {
-        return assistencias;
+    public int getGoals() {
+        return goals;
     }
 
-    public void setAssistencias(int assistencias) {
-        this.assistencias = assistencias;
+    public void setGoals(int goals) {
+        this.goals = goals;
     }
 
+    public int getAssists() {
+        return assists;
+    }
+
+    public void setAssists(int assists) {
+        this.assists = assists;
+    }
+
+    public int getYellowCard() {
+        return yellowCard;
+    }
+
+    public void setYellowCard(int yellowCard) {
+        this.yellowCard = yellowCard;
+    }
+
+    public int getRedCard() {
+        return redCard;
+    }
+
+    public void setRedCard(int redCard) {
+        this.redCard = redCard;
+    }
+    
 }

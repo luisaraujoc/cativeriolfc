@@ -1,4 +1,4 @@
-package com.luisaraujoc.cativeriolfc.Sevices;
+package com.luisaraujoc.cativeriolfc.Services;
 
 import com.luisaraujoc.cativeriolfc.DTO.CurrentPlayersRequest;
 import com.luisaraujoc.cativeriolfc.DTO.SortTeamRequest;

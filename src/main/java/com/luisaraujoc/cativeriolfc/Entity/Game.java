@@ -1,6 +1,6 @@
 package com.luisaraujoc.cativeriolfc.Entity;
 
-public class Jogo {
+public class Game {
 
 	private long id;
 	private Team times;

@@ -1,4 +1,4 @@
-package com.luisaraujoc.cativeriolfc.Sevices;
+package com.luisaraujoc.cativeriolfc.Services;
 
 import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
 import com.luisaraujoc.cativeriolfc.Dao.GuestDao;
