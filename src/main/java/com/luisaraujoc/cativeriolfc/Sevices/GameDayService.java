@@ -12,28 +12,29 @@ import com.luisaraujoc.cativeriolfc.Entity.Team;
 import com.luisaraujoc.cativeriolfc.Exception.DbException;
 import com.luisaraujoc.cativeriolfc.Interface.GameDayTeamDaoInter;
 import com.luisaraujoc.cativeriolfc.Util.GenerateTeam;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.luisaraujoc.cativeriolfc.Enum.Role.ADMIN;
 
-
+@Service
 public class GameDayService {
 
-    public static GameDayDAO gameDao = DaoFactory.createGameDayDao();
-    public static GameDayTeamDaoInter gameDayTeamDao = DaoFactory.createGameDayTeamDao();
+    public GameDayDAO gameDao = DaoFactory.createGameDayDao();
+    public GameDayTeamDaoInter gameDayTeamDao = DaoFactory.createGameDayTeamDao();
 
 
-    public static GameDay findByDate(String date) {
+    public GameDay findByDate(String date) {
         return gameDao.findByDate(date);
     }
 
-    public static GameDay insert(GameDay gameDay) {
+    public  GameDay insert(GameDay gameDay) {
         return gameDao.createGameDay(gameDay);
     }
 
-    public static List<Person> addPlayers(CurrentPlayersRequest cpr){
+    public List<Person> addPlayers(CurrentPlayersRequest cpr){
 
         GameDay gd = DaoFactory.createGameDayDao().findById(cpr.getGameDayId());
         CurrentPlayerDao cpd = DaoFactory.createCurrentPlayerDao();
@@ -49,11 +50,11 @@ public class GameDayService {
         return people;
     }
 
-    public static void deletePlayers(Long id){
+    public void deletePlayers(Long id){
         DaoFactory.createCurrentPlayerDao().delete(id);
     }
 
-    public static List<Team> sortTeam(SortTeamRequest sortTeamRequest){
+    public List<Team> sortTeam(SortTeamRequest sortTeamRequest){
         Person p = DaoFactory.createPersonDao().findById(sortTeamRequest.getPersonId());
         GameDay gameDay = DaoFactory.createGameDayDao().findById(sortTeamRequest.getGameDayId());
         if(p.getKindPerson() == ADMIN){

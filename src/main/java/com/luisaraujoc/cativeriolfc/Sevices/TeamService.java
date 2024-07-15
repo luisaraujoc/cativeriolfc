@@ -4,20 +4,22 @@ import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
 import com.luisaraujoc.cativeriolfc.Dao.TeamDao;
 import com.luisaraujoc.cativeriolfc.Entity.Team;
 import com.luisaraujoc.cativeriolfc.Interface.GameDayTeamDaoInter;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TeamService {
 
-    public static TeamDao teamDao = DaoFactory.createTeamDao();
-    public static GameDayTeamDaoInter gameDayTeamDao = DaoFactory.createGameDayTeamDao();
+    public TeamDao teamDao = DaoFactory.createTeamDao();
+    public GameDayTeamDaoInter gameDayTeamDao = DaoFactory.createGameDayTeamDao();
 
 
-    public static List<Team> findAllByGameDay(Long idGameDay) {
+    public  List<Team> findAllByGameDay(Long idGameDay) {
         return gameDayTeamDao.findTeamsByIdGameDay(idGameDay);
     }
 
-    public static Team findById(Long idTeam) {
+    public  Team findById(Long idTeam) {
         return teamDao.findById(idTeam);
     }
 
