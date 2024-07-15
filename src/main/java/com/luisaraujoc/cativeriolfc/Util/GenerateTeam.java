@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class GenerateTeam {
     public static void handleCreation(GameDay gameDay){
-        Random random = new Random();
+		Random random = new Random();
 		List<Person> playersToAdd = gameDay.getCurrentPlayers();
 		List<Person> currentTeam = new ArrayList<>();
 		GameDayTeamDaoInter gtd = DaoFactory.createGameDayTeamDao();
@@ -36,11 +36,7 @@ public class GenerateTeam {
 
 			currentTeam.clear();
 		}
-
-		List<Team> TeamsInGameDay = gtd.findTeamsByIdGameDay(gameDay.getId());
-
 		gameDay.findCurrentTeams();
-
     }
 
 }

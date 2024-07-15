@@ -1,6 +1,7 @@
 package com.luisaraujoc.cativeriolfc.Controllers;
 
 import com.luisaraujoc.cativeriolfc.DTO.CurrentPlayersRequest;
+import com.luisaraujoc.cativeriolfc.DTO.SortTeamRequest;
 import com.luisaraujoc.cativeriolfc.Entity.GameDay;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Entity.Team;
@@ -39,6 +40,14 @@ public class GameDayController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(1).toUri();
         return ResponseEntity.created(uri).body(currentPlayers);
     }
+
+    @PostMapping(value = "/sortTeam")
+    public ResponseEntity<List<Team>> sortTeam(@RequestBody SortTeamRequest sortTeamRequestRequest) {
+        List<Team> Teams = GameDayService.sortTeam(sortTeamRequestRequest);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(1).toUri();
+        return ResponseEntity.created(uri).body(Teams);
+    }
+
     @DeleteMapping(value = "del/{id}")
     public ResponseEntity<Void> deletePlayers(@PathVariable Long id){
         GameDayService.deletePlayers(id);
