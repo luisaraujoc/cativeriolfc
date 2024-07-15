@@ -5,9 +5,10 @@ import com.luisaraujoc.cativeriolfc.DTO.SortTeamRequest;
 import com.luisaraujoc.cativeriolfc.Entity.GameDay;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Entity.Team;
-import com.luisaraujoc.cativeriolfc.Sevices.GameDayService;
-import com.luisaraujoc.cativeriolfc.Sevices.TeamService;
-import com.luisaraujoc.cativeriolfc.Sevices.UserService;
+import com.luisaraujoc.cativeriolfc.Services.GameDayService;
+import com.luisaraujoc.cativeriolfc.Services.TeamService;
+import com.luisaraujoc.cativeriolfc.Services.UserService;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

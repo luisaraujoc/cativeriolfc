@@ -1,7 +1,8 @@
 package com.luisaraujoc.cativeriolfc.Controllers;
 
 import com.luisaraujoc.cativeriolfc.Entity.Team;
-import com.luisaraujoc.cativeriolfc.Sevices.TeamService;
+import com.luisaraujoc.cativeriolfc.Services.TeamService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

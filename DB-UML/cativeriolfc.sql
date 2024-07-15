@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `scout` (
 -- Despejando dados para a tabela `scout`
 --
 
-INSERT INTO `scout` (`id`, `Team_id`, `Game_id`, `Person_id`, `gol`) VALUES
+INSERT INTO `scout` (`id`, `Team_id`, `Game_id`, `Person_id`, goals) VALUES
 (1, 1, 1, 1, 2),
 (2, 1, 2, 2, 1),
 (3, 2, 3, 3, 3);

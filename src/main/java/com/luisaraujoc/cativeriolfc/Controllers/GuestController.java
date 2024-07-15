@@ -3,8 +3,9 @@ package com.luisaraujoc.cativeriolfc.Controllers;
 import com.luisaraujoc.cativeriolfc.DTO.GuestRequest;
 import com.luisaraujoc.cativeriolfc.Entity.Guest;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
-import com.luisaraujoc.cativeriolfc.Sevices.GuestService;
-import com.luisaraujoc.cativeriolfc.Sevices.PersonService;
+import com.luisaraujoc.cativeriolfc.Services.GuestService;
+import com.luisaraujoc.cativeriolfc.Services.PersonService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
