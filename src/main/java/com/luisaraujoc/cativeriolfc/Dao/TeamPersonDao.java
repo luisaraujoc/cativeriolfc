@@ -1,37 +1,39 @@
 package com.luisaraujoc.cativeriolfc.Dao;
 
 import com.luisaraujoc.cativeriolfc.Config.DB;
-import com.luisaraujoc.cativeriolfc.Entity.GameDay;
+import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Entity.Team;
 import com.luisaraujoc.cativeriolfc.Exception.DbException;
-import com.luisaraujoc.cativeriolfc.Interface.GameDayTeamDaoInter;
+import com.luisaraujoc.cativeriolfc.Interface.TeamPersonDaoInter;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameDayTeamDAO implements GameDayTeamDaoInter {
-    private Connection conn = null;
-    public GameDayTeamDAO(Connection conn){
+public class TeamPersonDao implements TeamPersonDaoInter {
+    private static Connection conn;
+
+    public TeamPersonDao(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public void insert(GameDay gameDay, Team team) {
+    public void insert(Team team, Long CurrentPlayerId) {
+
         PreparedStatement st = null;
         ResultSet rs = null;
 
         try {
 
-            st = conn.prepareStatement("INSERT INTO gameday_team (team_id, gameDay_id) VALUES (?, ?)",
+            st = conn.prepareStatement("INSERT INTO team_person (current_player_id, time_id) VALUES (?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            st.setLong(1, team.getId());
-            st.setLong(2, gameDay.getId());
+            st.setLong(1, CurrentPlayerId);
+            st.setLong(2, team.getId());
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected <= 0) {
-                throw new DbException("Nenhuma linha afetada ao inserir o dados no gameDay_Team.");
+                throw new DbException("Nenhuma linha afetada ao inserir o dados no Team_Person.");
             }
 
         } catch (SQLException e) {
@@ -42,24 +44,25 @@ public class GameDayTeamDAO implements GameDayTeamDaoInter {
     }
 
     @Override
-    public List<Team> findTeamsByIdGameDay(Long idGameDay) {
+    public List<Person> findPeopleByIdTeam(Long teamId) {
         PreparedStatement st = null;
         ResultSet rs = null;
-        List<Team> teams = new ArrayList<>();
+        List<Person> people = new ArrayList<>();
+        CurrentPlayerDao cpd = DaoFactory.createCurrentPlayerDao();
 
         try {
 
-            st =  conn.prepareStatement("select * from gameday_Team WHERE gameDay_id = ?");
-            st.setLong(1, idGameDay);
+            st =  conn.prepareStatement("select * from team_person WHERE time_id = ?");
+            st.setLong(1, teamId);
             rs = st.executeQuery();
 
 
             while(rs.next()) {
-                TeamDao td = DaoFactory.createTeamDao();
-                teams.add(td.findById(rs.getLong("team_id")));
+                Person p = cpd.findPeopleByIdCurrentPlayer(rs.getLong("current_player_id"));
+                people.add(p);
             }
 
-            return teams;
+            return people;
 
         }catch(SQLException e) {
             throw new DbException(e.getMessage());
@@ -67,26 +70,20 @@ public class GameDayTeamDAO implements GameDayTeamDaoInter {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
-
     }
-//Continua
+
     @Override
-    public Team update(Long id, Team obj) {
+    public Person update(Long id, Person obj) {
         return null;
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Team team, Person person) {
 
     }
 
     @Override
-    public Team findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<Team> findAll() {
+    public List<Person> findAll() {
         return List.of();
     }
 }

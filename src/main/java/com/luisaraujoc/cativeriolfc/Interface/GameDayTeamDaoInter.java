@@ -8,7 +8,7 @@ import java.util.List;
 public interface GameDayTeamDaoInter {
 
     void insert(GameDay gameDay, Team team);
-    List<Team> findTeamsByIdGameDay(GameDay gameDay);
+    List<Team> findTeamsByIdGameDay(Long idGameDay);
     Team update(Long id, Team obj);
     void delete(Long id);
     Team findById(Long id);

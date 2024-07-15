@@ -163,28 +163,6 @@ public class PersonDao implements PersonDaoInter {
         return pList;
     }
 
-    public List<Person> findByGameDay(GameDay gameDay){
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        List<Person> pList = new ArrayList<>();
-
-        try {
-            st = conn.prepareStatement("SELECT * FROM current_player WHERE gameDay_id = ?");
-            st.setLong(1, gameDay.getId());
-            rs = st.executeQuery();
-
-            while (rs.next()) {
-                pList.add(createNewPerson(rs));
-            }
-        } catch (SQLException e) {
-            throw new DbException(e.getMessage());
-        } finally {
-            DB.closeResultSet(rs);
-            DB.closeStatement(st);
-        }
-        return pList;
-    }
-
     public Person createNewPerson(ResultSet rs) throws SQLException {
         return new Person(
                 rs.getLong("id"),

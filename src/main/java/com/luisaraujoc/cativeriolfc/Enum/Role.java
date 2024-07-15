@@ -21,6 +21,6 @@ public enum Role {
                 return role;
             }
         }
-        throw new IllegalArgumentException("Valor desconhecido: " + value);
+        throw new IllegalArgumentException("Valor desconhecido: >" + value);
     }
 }

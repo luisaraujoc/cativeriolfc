@@ -4,12 +4,13 @@ import com.luisaraujoc.cativeriolfc.Entity.Guest;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Config.DB;
 import com.luisaraujoc.cativeriolfc.Exception.DbException;
+import com.luisaraujoc.cativeriolfc.Interface.GuestDaoInter;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuestDao {
+public class GuestDao implements GuestDaoInter {
 
     private Connection conn;
 
