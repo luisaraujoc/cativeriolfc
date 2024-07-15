@@ -29,6 +29,10 @@ public class CurrentPlayerDao implements CurrentPlayerDaoInter {
             st = conn.prepareStatement("INSERT INTO current_player (person_id, gameDay_id) VALUES (?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
+            if(findCurrentPlayerId(person, gameDay) != null){
+                throw new DbException("O jogador já está listado nesta data");
+            }
+
             st.setLong(1, person.getId());
             st.setLong(2, gameDay.getId());
             int rowsAffected = st.executeUpdate();
@@ -134,8 +138,18 @@ public class CurrentPlayerDao implements CurrentPlayerDaoInter {
     }
 
     @Override
-    public void delete(GameDay gameDay, Person person) {
+    public void delete(Long id) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement("DELETE FROM current_player WHERE Id = ?");
 
+            st.setLong(1, id);
+            st.executeUpdate();
+        }catch(SQLException e) {
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

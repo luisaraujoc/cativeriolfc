@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.Calendar;
 
 public class GameDayDAO implements GameDayDaoInter {
 
@@ -23,11 +24,15 @@ public class GameDayDAO implements GameDayDaoInter {
     public GameDay createGameDay (GameDay gameDay){
         PreparedStatement st = null;
 
-
         try{
             st = conn.prepareStatement("INSERT INTO gameday (date) VALUES (?)",Statement.RETURN_GENERATED_KEYS);
 
-            st.setDate(1, new java.sql.Date(gameDay.getDate().getTime()));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(gameDay.getDate());
+            calendar.add(Calendar.HOUR_OF_DAY, 3);
+            java.util.Date updatedDate = calendar.getTime();
+
+            st.setDate(1, new java.sql.Date(updatedDate.getTime()));
             st.executeUpdate();
             ResultSet rs = st.getGeneratedKeys();
             if(rs.next()){
