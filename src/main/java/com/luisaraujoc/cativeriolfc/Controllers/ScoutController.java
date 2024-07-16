@@ -2,6 +2,7 @@ package com.luisaraujoc.cativeriolfc.Controllers;
 
 import com.luisaraujoc.cativeriolfc.Entity.Scout;
 import com.luisaraujoc.cativeriolfc.Services.ScoutService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,11 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/scout")
 public class ScoutController {
-    private final ScoutService scoutService;
 
-    public ScoutController(ScoutService scoutService) {
-        this.scoutService = scoutService;
-    }
+    @Autowired
+    ScoutService scoutService;
 
     @PostMapping("/add")
     public ResponseEntity<Scout> createScout(@RequestBody Scout scout) {
