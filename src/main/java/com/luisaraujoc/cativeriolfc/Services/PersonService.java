@@ -3,16 +3,18 @@ package com.luisaraujoc.cativeriolfc.Services;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Dao.DaoFactory;
 import com.luisaraujoc.cativeriolfc.Dao.PersonDao;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PersonService {
 
-    public static PersonDao personDao = DaoFactory.createPersonDao();
+    public  PersonDao personDao = DaoFactory.createPersonDao();
 
-    public static Person insert(Person obj) {
+    public  Person insert(Person obj) {
         return personDao.insert(obj);
     }
 
-    public static Person findById(Long id) {
+    public  Person findById(Long id) {
         return personDao.findById(id);
     }
 }

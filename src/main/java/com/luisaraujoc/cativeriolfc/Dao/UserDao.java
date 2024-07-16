@@ -123,6 +123,34 @@ public class UserDao implements UserDaoInter {
     }
 
     @Override
+    public User findByIdPerson(Long id) {
+
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+
+            st =  conn.prepareStatement("select * from user WHERE person_id = ?");
+            st.setLong(1, id);
+            rs = st.executeQuery();
+
+
+            if(rs.next()) {
+                return createNewUser(rs);
+            }
+
+        }catch(SQLException e) {
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
+
+        return null;
+
+    }
+
+    @Override
     public List<User> findAll() {
         Statement st = null;
         ResultSet rs = null;

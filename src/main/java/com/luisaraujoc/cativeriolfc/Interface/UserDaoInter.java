@@ -12,6 +12,7 @@ public interface UserDaoInter {
     User update(Long id, User obj);
     void delete(Long id);
     User findById(Long id);
+    User findByIdPerson(Long id);
     List<User> findAll();
 
 

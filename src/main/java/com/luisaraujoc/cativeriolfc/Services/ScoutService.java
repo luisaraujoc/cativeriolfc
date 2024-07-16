@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class ScoutService {
+    /*
     private final ScoutDao scoutDao;
 
     public ScoutService(ScoutDao scoutDao) {
@@ -47,4 +48,6 @@ public class ScoutService {
     public List<Scout> getScoutsByPlayer(Long playerId) {
         return scoutDao.findByPlayerId(playerId);
     }
+
+     */
 }
