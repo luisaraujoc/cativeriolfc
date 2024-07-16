@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 public class ScoutDao {
-    private final DataSource dataSource;
+    /*private final DataSource dataSource;
 
     public ScoutDao(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -178,4 +178,7 @@ public class ScoutDao {
         scout.setRedCard(rs.getInt("red_card"));
         return scout;
     }
+
+    
+     */
 }

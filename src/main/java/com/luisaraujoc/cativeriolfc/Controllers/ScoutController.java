@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/scout")
 public class ScoutController {
-
+/*
     @Autowired
     ScoutService scoutService;
 
@@ -64,4 +64,6 @@ public class ScoutController {
     //     scoutService.deleteScout(id);
     //     return ResponseEntity.noContent().build();
     // }
+
+ */
 }

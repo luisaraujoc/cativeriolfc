@@ -1,0 +1,2 @@
+Person sendo criado mesmo com erro no users
+testar verificações feita no gameDayService ( SortTeam - adicionei verificação de senha //Add player - adicionei verificação de senha e de kindPerson)

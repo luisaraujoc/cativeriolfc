@@ -9,8 +9,10 @@ import com.luisaraujoc.cativeriolfc.Dao.PersonDao;
 import com.luisaraujoc.cativeriolfc.Entity.GameDay;
 import com.luisaraujoc.cativeriolfc.Entity.Person;
 import com.luisaraujoc.cativeriolfc.Entity.Team;
+import com.luisaraujoc.cativeriolfc.Entity.User;
 import com.luisaraujoc.cativeriolfc.Exception.DbException;
 import com.luisaraujoc.cativeriolfc.Interface.GameDayTeamDaoInter;
+import com.luisaraujoc.cativeriolfc.Util.Cryptography;
 import com.luisaraujoc.cativeriolfc.Util.GenerateTeam;
 import org.springframework.stereotype.Service;
 
@@ -30,37 +32,62 @@ public class GameDayService {
         return gameDao.findByDate(date);
     }
 
-    public  GameDay insert(GameDay gameDay) {
+    public GameDay insert(GameDay gameDay) {
         return gameDao.createGameDay(gameDay);
     }
 
-    public List<Person> addPlayers(CurrentPlayersRequest cpr){
+    public List<Person> addPlayers(CurrentPlayersRequest cpr) {
+
 
         GameDay gd = DaoFactory.createGameDayDao().findById(cpr.getGameDayId());
         CurrentPlayerDao cpd = DaoFactory.createCurrentPlayerDao();
         PersonDao pdao = DaoFactory.createPersonDao();
         List<Person> people = new ArrayList<>();
 
-        for(Long personId : cpr.getPlayerId()){
-            Person p = pdao.findById(personId);
-            cpd.insert(gd, p);
-            people.add(p);
+        if (cpr.getPlayerId().size() > 1) {
+            if (pdao.findById(cpr.getPersonId()).getKindPerson() == ADMIN) {
+                for (Long personId : cpr.getPlayerId()) {
+                    Person p = pdao.findById(personId);
+                    cpd.insert(gd, p);
+                    people.add(p);
+                }
+            } else {
+                throw new DbException("Apenas ADMIN podem adicionar mais um player por vez à lista de jogo");
+            }
         }
 
+        if (cpr.getPlayerId().size() == 1) {
+
+            for (Long personId : cpr.getPlayerId()) {
+                Person p = pdao.findById(personId);
+                if(pdao.findById(cpr.getPersonId()) == p || pdao.findById(cpr.getPersonId()).getKindPerson() == ADMIN) {
+                    cpd.insert(gd, p);
+                    people.add(p);
+                }else {
+                    throw new DbException("Apenas ADMIN podem adicionar outro player");
+                }
+            }
+
+        }
         return people;
     }
 
-    public void deletePlayers(Long id){
+    public void deletePlayers(Long id) {
         DaoFactory.createCurrentPlayerDao().delete(id);
     }
 
-    public List<Team> sortTeam(SortTeamRequest sortTeamRequest){
+    public List<Team> sortTeam(SortTeamRequest sortTeamRequest) {
         Person p = DaoFactory.createPersonDao().findById(sortTeamRequest.getPersonId());
         GameDay gameDay = DaoFactory.createGameDayDao().findById(sortTeamRequest.getGameDayId());
-        if(p.getKindPerson() == ADMIN){
+        User u = DaoFactory.createUserDao().findByIdPerson(p.getId());
+        boolean verifiedPassword = Cryptography.checkPassword(sortTeamRequest.getPassword(), u.getPassword());
+
+        if (p.getKindPerson() == ADMIN && verifiedPassword) {
+
             GenerateTeam.handleCreation(gameDay);
             return gameDay.getTeams();
-        }else{
+
+        } else {
             throw new DbException(p.getName() + " não é um ADMIN");
         }
 
