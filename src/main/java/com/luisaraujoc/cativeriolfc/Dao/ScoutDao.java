@@ -1,184 +1,235 @@
 package com.luisaraujoc.cativeriolfc.Dao;
 
-import com.luisaraujoc.cativeriolfc.Entity.Scout;
-import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
+import com.luisaraujoc.cativeriolfc.Config.DB;
+import com.luisaraujoc.cativeriolfc.Entity.Scout;
+import com.luisaraujoc.cativeriolfc.Exception.DbException;
+import com.luisaraujoc.cativeriolfc.Interface.ScoutDaoInter;
+
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
+public class ScoutDao implements ScoutDaoInter {
 
-public class ScoutDao {
-    /*private final DataSource dataSource;
+    private Connection conn = null;
 
-    public ScoutDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public ScoutDao(Connection conn) {
+        this.conn = conn;
     }
 
+
+    // insert
     public void insert(Scout scout) {
-        String sql = "INSERT INTO scout (team_id, game_id, person_id, goals, assists, yellow_card, red_card) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        PreparedStatement st = null;
+
+        try {
+            st = conn.prepareStatement("INSERT INTO scout (team_id, game_id, person_id, goals, yellow_card, red_card, assists) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             st.setLong(1, scout.getTeamId());
             st.setLong(2, scout.getGameId());
             st.setLong(3, scout.getPlayerId());
             st.setInt(4, scout.getGoals());
-            st.setInt(5, scout.getAssists());
-            st.setInt(6, scout.getYellowCard());
-            st.setInt(7, scout.getRedCard());
+            st.setInt(5, scout.getYellowCard());
+            st.setInt(6, scout.getRedCard());
+            st.setInt(7, scout.getAssists());
 
             st.executeUpdate();
-
-            try (ResultSet rs = st.getGeneratedKeys()) {
-                if (rs.next()) {
-                    scout.setId(rs.getLong(1));
-                }
-            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DbException("Houve um erro ao gerar o Scout: " + e.getMessage());
+        } finally {
+            DB.closeStatement(st);
         }
     }
 
+    // update
+    public void update(Scout scout) {
+        PreparedStatement st = null;
+
+        try {
+            st = conn.prepareStatement("update scout set goals = ?, yellow_card = ?, red_card = ?, assists = ? where id = ?");
+
+            st.setInt(1, scout.getGoals());
+            st.setInt(2, scout.getYellowCard());
+            st.setInt(3, scout.getRedCard());
+            st.setInt(4, scout.getAssists());
+            st.setLong(5, scout.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException("Houve um erro ao atualizar o Scout: " + e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
+    }
+
+    // findById
     public Scout findById(Long id) {
-        String sql = "SELECT * FROM scout WHERE id = ?";
-        Scout scout = null;
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
 
-            ps.setLong(1, id);
+        try {
+            st = conn.prepareStatement("select * from scout where id = ?");
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    scout = mapRow(rs);
-                }
+            st.setLong(1, id);
+
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return new Scout(
+                        rs.getLong("id"),
+                        rs.getLong("team_id"),
+                        rs.getLong("game_id"),
+                        rs.getLong("person_id"),
+                        rs.getInt("goals"),
+                        rs.getInt("yellow_card"),
+                        rs.getInt("red_card"),
+                        rs.getInt("assists")
+                );
             }
+            return null;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DbException("Houve um erro ao buscar o Scout: " + e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
         }
-        return scout;
     }
 
+    // findAll
     public List<Scout> findAll() {
-        String sql = "SELECT * FROM scout";
-        List<Scout> scouts = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
 
-            while (rs.next()) {
-                scouts.add(mapRow(rs));
+        try {
+            st = conn.prepareStatement("select * from scout");
+
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return List.of(new Scout(
+                        rs.getLong("id"),
+                        rs.getLong("team_id"),
+                        rs.getLong("game_id"),
+                        rs.getLong("person_id"),
+                        rs.getInt("goals"),
+                        rs.getInt("yellow_card"),
+                        rs.getInt("red_card"),
+                        rs.getInt("assists")
+                ));
             }
+            return null;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DbException("Houve um erro ao buscar o Scout: " + e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
         }
-        return scouts;
     }
 
+    // findByGameId
     public List<Scout> findByGameId(Long gameId) {
-        String sql = "SELECT * FROM scout WHERE game_id = ?";
-        List<Scout> scouts = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
 
-            ps.setLong(1, gameId);
+        try {
+            st = conn.prepareStatement("select * from scout where game_id = ?");
+            st.setLong(1, gameId);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    scouts.add(mapRow(rs));
-                }
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return List.of(new Scout(
+                        rs.getLong("id"),
+                        rs.getLong("team_id"),
+                        rs.getLong("game_id"),
+                        rs.getLong("person_id"),
+                        rs.getInt("goals"),
+                        rs.getInt("yellow_card"),
+                        rs.getInt("red_card"),
+                        rs.getInt("assists")
+                ));
             }
+            return null;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DbException("Houve um erro ao buscar o Scout: " + e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
         }
-        return scouts;
     }
 
-    public List<Scout> findByPlayerId(Long playerId) {
-        String sql = "SELECT * FROM scout WHERE person_id = ?";
-        List<Scout> scouts = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+    // findByPersonId
+    public List<Scout> findByPersonId(Long personId) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
 
-            ps.setLong(1, playerId);
+        try {
+            st = conn.prepareStatement("select * from scout where person_id = ?");
+            st.setLong(1, personId);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    scouts.add(mapRow(rs));
-                }
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return List.of(
+                        new Scout(
+                                rs.getLong("id"),
+                                rs.getLong("team_id"),
+                                rs.getLong("game_id"),
+                                rs.getLong("person_id"),
+                                rs.getInt("goals"),
+                                rs.getInt("yellow_card"),
+                                rs.getInt("red_card"),
+                                rs.getInt("assists")
+                        )
+                );
             }
+            return null;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DbException("Houve um erro ao buscar o Scout: " + e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
         }
-        return scouts;
     }
 
+    // findByTeamId
     public List<Scout> findByTeamId(Long teamId) {
-        String sql = "SELECT * FROM scout WHERE team_id = ?";
-        List<Scout> scouts = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
 
-            ps.setLong(1, teamId);
+        try {
+            st = conn.prepareStatement("select * from scout where team_id = ?");
+            st.setLong(1, teamId);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    scouts.add(mapRow(rs));
-                }
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                return List.of(
+                        new Scout(
+                                rs.getLong("id"),
+                                rs.getLong("team_id"),
+                                rs.getLong("game_id"),
+                                rs.getLong("person_id"),
+                                rs.getInt("goals"),
+                                rs.getInt("yellow_card"),
+                                rs.getInt("red_card"),
+                                rs.getInt("assists")
+                        )
+                );
             }
+            return null;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DbException("Houve um erro ao buscar o Scout: " + e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
         }
-        return scouts;
     }
 
-    // public void delete(Long id) {
-    //     String sql = "DELETE FROM scout WHERE id = ?";
-    //     try (Connection conn = dataSource.getConnection();
-    //          PreparedStatement ps = conn.prepareStatement(sql)) {
+    // não teremos delete, pois não é interessante deletar um scout.
 
-    //         ps.setLong(1, id);
-    //         ps.executeUpdate();
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
+    // closeConnection
+    // public void closeConnection(){
+    //      DB.closeConnection();
     // }
-
-    public Scout update(Long id, Scout scout) {
-        String sql = "UPDATE scout SET team_id = ?, game_id = ?, person_id = ?, goals = ?, assists = ?, yellow_card = ?, red_card = ? WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setLong(1, scout.getTeamId());
-            ps.setLong(2, scout.getGameId());
-            ps.setLong(3, scout.getPlayerId());
-            ps.setInt(4, scout.getGoals());
-            ps.setInt(5, scout.getAssists());
-            ps.setInt(6, scout.getYellowCard());
-            ps.setInt(7, scout.getRedCard());
-            ps.setLong(8, id);
-
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return scout;
-    }
-
-    private Scout mapRow(ResultSet rs) throws SQLException {
-        Scout scout = new Scout();
-        scout.setId(rs.getLong("id"));
-        scout.setTeamId(rs.getLong("team_id"));
-        scout.setGameId(rs.getLong("game_id"));
-        scout.setPlayerId(rs.getLong("person_id"));
-        scout.setGoals(rs.getInt("goals"));
-        scout.setAssists(rs.getInt("assists"));
-        scout.setYellowCard(rs.getInt("yellow_card"));
-        scout.setRedCard(rs.getInt("red_card"));
-        return scout;
-    }
-
-    
-     */
 }

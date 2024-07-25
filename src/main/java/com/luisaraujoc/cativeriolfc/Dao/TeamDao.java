@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TeamDao implements TeamDaoInter {
 
-    private static Connection conn;
+    private final Connection conn;
 
     public TeamDao(Connection conn) {
         this.conn = conn;
@@ -26,7 +26,7 @@ public class TeamDao implements TeamDaoInter {
 
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO team (nome) values (?)", Statement.RETURN_GENERATED_KEYS
+                    "INSERT INTO team (name) values (?)", Statement.RETURN_GENERATED_KEYS
             );
 
             st.setString(1, team.getName());

@@ -5,6 +5,7 @@ import com.luisaraujoc.cativeriolfc.Services.ScoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -12,58 +13,54 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/scout")
 public class ScoutController {
-/*
-    @Autowired
-    ScoutService scoutService;
+
+    private final ScoutService scoutService;
+
+    public ScoutController(ScoutService scoutService) {
+        this.scoutService = scoutService;
+    }
 
     @PostMapping("/add")
-    public ResponseEntity<Scout> createScout(@RequestBody Scout scout) {
-        Scout createdScout = scoutService.createScout(scout);
-        URI uri = URI.create(String.format("/api/scout/%s", createdScout.getId()));
-        return ResponseEntity.created(uri).body(createdScout);
+    public ResponseEntity<Scout> insert(@RequestBody Scout scout) {
+        scoutService.insert(scout);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scout.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(scout);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Scout> getScoutById(@PathVariable Long id) {
-        Scout scout = scoutService.getScoutById(id);
-        return ResponseEntity.ok().body(scout);
+    @PutMapping("/update")
+    public ResponseEntity<Scout> update(@RequestBody Scout scout) {
+        scoutService.update(scout);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scout.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(scout);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Scout>> getAllScouts() {
-        List<Scout> scouts = scoutService.getAllScouts();
-        return ResponseEntity.ok().body(scouts);
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Scout>> findAll() {
+        List<Scout> scoutList = scoutService.findAll();
+        return ResponseEntity.ok().body(scoutList);
     }
 
-    @GetMapping("/team/{teamId}")
-    public ResponseEntity<List<Scout>> getScoutsByTeam(@PathVariable Long teamId) {
-        List<Scout> scouts = scoutService.getScoutsByTeam(teamId);
-        return ResponseEntity.ok().body(scouts);
+    @GetMapping("/findByGameId/{gameId}")
+    public ResponseEntity<List<Scout>> findByGameId(@PathVariable Long gameId) {
+        List<Scout> scoutList = scoutService.findByGameId(gameId);
+        return ResponseEntity.ok().body(scoutList);
     }
 
-    @GetMapping("/game/{gameId}")
-    public ResponseEntity<List<Scout>> getScoutsByGame(@PathVariable Long gameId) {
-        List<Scout> scouts = scoutService.getScoutsByGame(gameId);
-        return ResponseEntity.ok().body(scouts);
+    @GetMapping("/findByPersonId/{personId}")
+    public ResponseEntity<List<Scout>> findByPersonId(@PathVariable Long personId) {
+        List<Scout> scoutList = scoutService.findByPersonId(personId);
+        return ResponseEntity.ok().body(scoutList);
     }
 
-    @GetMapping("/player/{playerId}")
-    public ResponseEntity<List<Scout>> getScoutsByPlayer(@PathVariable Long playerId) {
-        List<Scout> scouts = scoutService.getScoutsByPlayer(playerId);
-        return ResponseEntity.ok().body(scouts);
+    @GetMapping("/findByTeamId/{teamId}")
+    public ResponseEntity<List<Scout>> findByTeamId(@PathVariable Long teamId) {
+        List<Scout> scoutList = scoutService.findByTeamId(teamId);
+        return ResponseEntity.ok().body(scoutList);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Scout> updateScout(@PathVariable Long id, @RequestBody Scout scout) {
-        Scout updatedScout = scoutService.updateScout(id, scout);
-        return ResponseEntity.ok().body(updatedScout);
-    }
+    // não temos o método delete, não é necessário implementar
 
-    // @DeleteMapping("/del/{id}")
-    // public ResponseEntity<Void> deleteScout(@PathVariable Long id) {
-    //     scoutService.deleteScout(id);
-    //     return ResponseEntity.noContent().build();
-    // }
 
- */
 }
